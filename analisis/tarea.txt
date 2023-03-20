@@ -1,0 +1,12 @@
+1- conectar aplicacion escuela con bd
+de escuela
+	conexion.php
+
+2- Cambiar el menu(de la izquierda) de la aplicación conforme al documento
+
+
+3-cambiar el fondo de inicio
+
+4- quitar el dashboard
+
+5-completar el script sql

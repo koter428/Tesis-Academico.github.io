@@ -1,0 +1,25 @@
+
+Taller de Análisis y Programación
+
+Inicio	: inicio de noviembre
+Fin	: 19/12/2022
+
+0- Parámetros
+	Ciudades, barrios, escuelas
+	grados, cursos
+	
+- Módulo de Inscripciones
+	Alumnos, Grados, Cursos
+	Inscripción, control correlatividad
+	Aranceles
+- Módulo de Planificación
+	Grados, cursos, materias
+	contenidos, correlatividades,
+	recursos, profesores, profesores
+	por grado
+	
+- Módulo de Evaluaciones
+	Metas, objetivos, desarrollos
+	evaluaciones, tipos de evaluaciones
+	escala de calificaciones
+
