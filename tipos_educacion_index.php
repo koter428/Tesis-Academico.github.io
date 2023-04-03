@@ -29,17 +29,17 @@
                             </div>
                             <?php } ?>                 
                             <div class="box box-primary">
-                            <?php if ($_SESSION['DEPARTAMENTOS']['leer']==='t') { ?>
+                            <?php if ($_SESSION['TIPOS_EDUCACION']['leer']==='t') { ?>
                                 <div class="box-header">
                                     <i class="ion ion-clipboard"></i>
-                                    <h3 class="box-title">Departamento</h3>                                    
+                                    <h3 class="box-title">TIPOS DE EDUCACION</h3>                                    
                                     <div class="box-tools">
-                                    <?php if ($_SESSION['DEPARTAMENTOS']['insertar']==='t') { ?> 
+                                    <?php if ($_SESSION['TIPOS_EDUCACION']['insertar']==='t') { ?> 
                                         <a class="btn btn-primary btn-sm" data-title="Agregar" rel="tooltip" 
                                            data-toggle="modal" data-target="#registrar">
                                             <i class="fa fa-plus"></i>
                                         </a><?php } ?> 
-                                        <a href="departamentos_print.php" class="btn btn-default btn-sm" data-title="Imprimir" rel="tooltip" target="print">
+                                        <a href="tipos_educacion_print.php" class="btn btn-default btn-sm" data-title="Imprimir" rel="tooltip" target="print">
                                             <i class="fa fa-print"></i>
                                         </a>                                        
                                     </div>
@@ -47,7 +47,7 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <form action="departamentos_index.php" method="post" accept-charset="utf-8" class="form-horizontal">
+                                            <form action="tipos_educacion_index.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                                 <div class="box-body">
                                                     <div class="form-group">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -68,8 +68,8 @@
                                             if (isset($_REQUEST['buscar'])) {
                                                 $valor = $_REQUEST['buscar'];
                                             }*/
-                                            $departamentos = consultas::get_datos("select * from departamentos where nombre ilike '%".(isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by id_dpto"); 
-                                                  if (!empty($departamentos)) { ?> 
+                                            $tipos = consultas::get_datos("select * from tipos_educacion where nombre ilike '%".(isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by id_tipo"); 
+                                                 if (!empty($tipòs)) { ?>
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-condensed table-striped">
                                                     <thead>
@@ -80,18 +80,18 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php foreach ($departamentos as $dpto) { ?>
+                                                        <?php foreach ($tipos as $tipo) { ?>
                                                         <tr>
-                                                            <td data-title="nombre"><?php echo $dpto['nombre'];?></td>
-                                                            <td data-title="Código"><?php echo $dpto['id_dpto'];?></td>
+                                                            <td data-title="Nombre"><?php echo $tipo['nombre'];?></td>
+                                                            <td data-title="Código"><?php echo $tipo['id_tipo'];?></td>
                                                             <td data-title="Acciones" class="text-center">
-                                                            <?php if ($_SESSION['departamentos']['editar']=='t') { ?>
-                                                                <a onclick="editar(<?php echo  "'".$dpto['id_dpto']."_".$dpto['nombre']."'";?>)" class="btn btn-warning btn-sm" role="buttom" 
+                                                            <?php if ($_SESSION['TIPOS_EDUCACION']['editar']=='t') { ?>
+                                                                <a onclick="editar(<?php echo  "'".$tipo['id_tipo']."_".$tipo['nombre']."'";?>)" class="btn btn-warning btn-sm" role="buttom" 
                                                                    data-title="Editar" rel="tooltip" data-toggle="modal" data-target="#editar">
                                                                     <i class="fa fa-edit"></i>
                                                                 </a> <?php }?> 
-                                                                <?php if ($_SESSION['departamentos']['borrar']=='t') { ?>
-                                                                <a onclick="borrar(<?php echo "'".$dpto['id_dpto']."_".$dpto['nombre_']."'";?>)" class="btn btn-danger btn-sm" role="buttom" 
+                                                                <?php if ($_SESSION['TIPOS_EDUCACION']['borrar']=='t') { ?>
+                                                                <a onclick="borrar(<?php echo "'".$tipo['id_tipo']."_".$tipo['nombre']."'";?>)" class="btn btn-danger btn-sm" role="buttom" 
                                                                    data-title="Borrar" rel="tooltip" data-toggle="modal" data-target="#borrar">
                                                                     <i class="fa fa-trash"></i>
                                                                 </a>  <?php }?>                                                           
@@ -104,7 +104,7 @@
                                             <?php }else{ ?>
                                             <div class="alert alert-info flat">
                                                 <span class="glyphicon glyphicon-info-sign"></span>
-                                                No se han registrado Departamentos...
+                                                No se han registrado tipos de edudacion...
                                             </div>
                                             <?php } ?>
                                         </div>
@@ -122,11 +122,11 @@
                           <div class="modal-content">
                               <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal" arial-label="Close">x</button>
-                                  <h4 class="modal-title"><i class="fa fa-plus"></i> <strong>Registrar Departamento</strong></h4>
+                                  <h4 class="modal-title"><i class="fa fa-plus"></i> <strong>Registrar Tipo de Educacion</strong></h4>
                               </div>
-                              <form action="departamentos_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
+                              <form action="tipos_educacion_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                   <input type="hidden" name="accion" value="1">
-                                  <input type="hidden" name="id_dpto" value="0">
+                                  <input type="hidden" name="id_tipo" value="0">
                                   <div class="modal-body">
                                       <div class="form-group">
                                           <label class="control-label col-sm-2">Descripción:</label>
@@ -152,11 +152,11 @@
                           <div class="modal-content">
                               <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal" arial-label="Close">x</button>
-                                  <h4 class="modal-title"><i class="fa fa-edit"></i> <strong>Editar Departamentos</strong></h4>
+                                  <h4 class="modal-title"><i class="fa fa-edit"></i> <strong>Editar Tipos de Educacion</strong></h4>
                               </div>
-                              <form action="departamentos_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
+                              <form action="tipos_educacion_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                    <input type="hidden" name="accion" value="2">
-                                  <input type="hidden" name="id_dpto" id="cod" value="0">
+                                  <input type="hidden" name="id_tipo" id="cod" value="0">
                                   <div class="modal-body">
                                       <div class="form-group">
                                           <label class="control-label col-sm-2">Descripción:</label>
@@ -225,9 +225,9 @@
         };
         function borrar(datos){
             var dat = datos.split("_");
-            $('#si').attr('href','departamentos_control.php?id_dpto='+dat[0]+'&nombre='+dat[1]+'&accion=3');
+            $('#si').attr('href','tipos_educacion_control.php?id_tipo='+dat[0]+'&nombre='+dat[1]+'&accion=3');
             $('#confirmacion').html('<span class="glyphicon glyphicon-warning-sign"></span> \n\
-            Desea borrrar el departamento <strong>'+dat[1]+'</strong>?');
+            Desea borrrar el tipo de educacion <strong>'+dat[1]+'</strong>?');
         }
         </script>
     </body>

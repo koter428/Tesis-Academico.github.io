@@ -8,12 +8,12 @@ require 'funciones/lib_funciones.php';
 $accion = $_REQUEST['accion'];
 
 if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){
-    $sql = "select sp_departamentos(" . $accion . "," . 
-    (!empty($_REQUEST['id_dpto']) ? $_REQUEST['id_dpto'] : 0) . ",'" .
+    $sql = "select sp_turnos(" . $accion . "," . 
+    (!empty($_REQUEST['id_turno']) ? $_REQUEST[''] : 0) . ",'" .
     (!empty($_REQUEST['nombre']) ? $_REQUEST['nombre'] : "") . "') as resul";
 }  
 else if (strcmp($accion,"3") == 0){
-    $sql = "select sp_departamentos(" . $accion . "," . $_REQUEST['id_dpto'] . ") as resul";
+    $sql = "select sp_turnos(" . $accion . "," . $_REQUEST['id_turno'] . ") as resul";
 }
 //echo $sql; return;
 
@@ -25,5 +25,5 @@ if (isset($mensaje)) {
     header("location:" . $mensaje[1] . ".php");
 } else {
     $_SESSION['mensaje'] = "Error al procesar " . pg_last_error();
-    header("location:" . "departamentos_index.php");
+    header("location:" . "turnos_index.php");
 }

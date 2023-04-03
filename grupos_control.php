@@ -9,7 +9,7 @@ $accion = $_REQUEST['accion'];
 
 if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){
     $sql = "select sp_grupos(" . $accion . "," . 
-    (!empty($_REQUEST['id_grupo']) ? $_REQUEST[''] : 0) . ",'" .
+    (!empty($_REQUEST['id_grupo']) ? $_REQUEST['id_grupo'] : 0) . ",'" .
     (!empty($_REQUEST['nombre']) ? $_REQUEST['nombre'] : "") . "') as resul";
 }  
 else if (strcmp($accion,"3") == 0){
