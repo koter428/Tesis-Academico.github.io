@@ -10,7 +10,7 @@ $accion = $_REQUEST['accion'];
 if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){ 
     $sql = "select sp_deposito(" . $accion . "," . (!empty($_REQUEST['vdep_cod']) ? $_REQUEST['vdep_cod'] : 0) . ",'" .
     (!empty($_REQUEST['vdep_descri']) ? $_REQUEST['vdep_descri'] : '') . "'," .
-    (!empty($_REQUEST['vid_sucursal']) ? $_REQUEST['vid_sucursal'] :  1) . ") as resul";
+    (!empty($_REQUEST['id_institucion']) ? $_REQUEST['id_institucion'] :  1) . ") as resul";
 }
 else if (strcmp($accion,"3") == 0){
     $sql = "select sp_deposito(" . $accion . "," . $_REQUEST['vdep_cod']. ") as resul";

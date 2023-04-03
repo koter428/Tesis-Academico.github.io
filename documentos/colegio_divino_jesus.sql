@@ -28,7 +28,7 @@ drop table CURSOS_TURNOS;
 
 drop table DEPARTAMENTOS;
 
-drop table EMPLEADOS;
+drop table empleado;
 
 drop table EXAMENES;
 
@@ -222,7 +222,7 @@ create table CARGOS (
 /*==============================================================*/
 create table CIUDADES (
    ID_CIUDAD            SERIAL               not null,
-   ID_DPTO              INT4                 not null,
+   ID_departamentos              INT4                 not null,
    NOMBRE               D_VARCHAR60          not null,
    constraint PK_CIUDADES primary key (ID_CIUDAD)
 );
@@ -271,7 +271,7 @@ create table CURSOSPLANIFICACION (
 );
 
 comment on table CURSOSPLANIFICACION is
-'dias: 1-domingo, 2-lunes, 3-martes, 4-miércoles, 5-jueves, 6-viernes, 7-sabado';
+'dias: 1-domingo, 2-lunes, 3-martes, 4-miï¿½rcoles, 5-jueves, 6-viernes, 7-sabado';
 
 /*==============================================================*/
 /* Table: CURSOS_TURNOS                                         */
@@ -287,16 +287,16 @@ create table CURSOS_TURNOS (
 /* Table: DEPARTAMENTOS                                         */
 /*==============================================================*/
 create table DEPARTAMENTOS (
-   ID_DPTO              SERIAL               not null,
+   ID_departamentos              SERIAL               not null,
    NOMBRE               D_VARCHAR60          not null,
-   constraint PK_DEPARTAMENTOS primary key (ID_DPTO)
+   constraint PK_DEPARTAMENTOS primary key (ID_departamentos)
 );
 
 /*==============================================================*/
-/* Table: EMPLEADOS                                             */
+/* Table: empleado                                             */
 /*==============================================================*/
-create table EMPLEADOS (
-   ID_EMPLEADO          SERIAL               not null,
+create table empleado (
+   ID_empleado          SERIAL               not null,
    NOMBRE               D_VARCHAR60          not null,
    APELLIDO             D_VARCHAR60          not null,
    NRO_DOCUMENTO        D_VARCHAR15          not null,
@@ -310,7 +310,7 @@ create table EMPLEADOS (
    SEXO                 D_CHAR1              not null,
    ESTADO               D_CHAR1              not null,
    FECHA_INGRESO        D_TIMESTAMP          not null,
-   constraint PK_EMPLEADOS primary key (ID_EMPLEADO)
+   constraint PK_empleado primary key (ID_empleado)
 );
 
 /*==============================================================*/
@@ -406,7 +406,7 @@ create table INSTITUCIONES (
 );
 
 comment on table INSTITUCIONES is
-'tipo: privado, público';
+'tipo: privado, pï¿½blico';
 
 /*==============================================================*/
 /* Table: MATERIAS                                              */
@@ -567,8 +567,8 @@ alter table AULASXCURSOS
       on delete restrict on update restrict;
 
 alter table AULASXCURSOS
-   add constraint FK_AULASXCU_REFERENCE_EMPLEADO foreign key (ID_PROFESOR)
-      references EMPLEADOS (ID_EMPLEADO)
+   add constraint FK_AULASXCU_REFERENCE_empleado foreign key (ID_PROFESOR)
+      references empleado (ID_empleado)
       on delete restrict on update restrict;
 
 alter table BARRIOS
@@ -582,8 +582,8 @@ alter table CAPACIDADES
       on delete restrict on update restrict;
 
 alter table CIUDADES
-   add constraint FK_CIUDADES_REFERENCE_DEPARTAM foreign key (ID_DPTO)
-      references DEPARTAMENTOS (ID_DPTO)
+   add constraint FK_CIUDADES_REFERENCE_DEPARTAM foreign key (ID_departamentos)
+      references DEPARTAMENTOS (ID_departamentos)
       on delete restrict on update restrict;
 
 alter table CONTENIDOS
@@ -626,8 +626,8 @@ alter table CURSOS_TURNOS
       references CURSOS (ID_CURSO)
       on delete cascade on update restrict;
 
-alter table EMPLEADOS
-   add constraint FK_EMPLEADO_REFERENCE_CARGOS foreign key (ID_CARGO)
+alter table empleado
+   add constraint FK_empleado_REFERENCE_CARGOS foreign key (ID_CARGO)
       references CARGOS (ID_CARGO)
       on delete restrict on update restrict;
 

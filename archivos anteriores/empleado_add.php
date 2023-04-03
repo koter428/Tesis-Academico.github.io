@@ -25,7 +25,7 @@
                             <div class="box box-primary">
                                 <div class="box-header">
                                     <i class="ion ion-android-person-add"></i>
-                                    <h3 class="box-title">Agregar Empleado</h3>
+                                    <h3 class="box-title">Agregar empleado</h3>
                                     <div class="box-tools">
                                         <a href="empleado_index.php" class="btn btn-primary pull-right btn-sm" data-title="Volver" rel="tooltip">
                                             <i class="fa fa-arrow-left"></i>
@@ -34,7 +34,7 @@
                                 </div>
                                 <form action="empleado_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                     <div class="box-body">
-                                        <input type="hidden" name="vemp_cod" value="0"/>
+                                        <input type="hidden" name="vid_empleado" value="0"/>
                                         <input type="hidden" name="accion" value="1"/>
                                           <!-- AGREGAR LISTA DESPLEGABLE CARGO -->
                                           <div class="form-group">
@@ -61,13 +61,13 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">Nombres:</label>
                                             <div class="col-lg-6">
-                                                <input type="text" name="vemp_nombre" class="form-control" required="" placeholder="Ingrese el nombre del empleado"/>
+                                                <input type="text" name="vnombre_empleado" class="form-control" required="" placeholder="Ingrese el nombre del empleado"/>
                                             </div>
                                         </div>                  
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">Apellidos:</label>
                                             <div class="col-lg-6">
-                                                <input type="text" name="vemp_apellido" class="form-control" required="" placeholder="Ingrese el apellido del empleado"/>
+                                                <input type="text" name="vnombre_empleado" class="form-control" required="" placeholder="Ingrese el apellido del empleado"/>
                                             </div>
                                         </div> 
                                         <div class="form-group">

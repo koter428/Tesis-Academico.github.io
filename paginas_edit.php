@@ -39,40 +39,40 @@ and open the template in the editor.
                                 </div> 
                                 <form action="paginas_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                 <div class="box-body">
-                                        <?php $resultado = consultas::get_datos("select * from paginas where pag_cod=".$_GET['vpag_cod']);?>
+                                        <?php $resultado = consultas::get_datos("select * from paginas where id_pagina=" . $_GET['vpag_cod']);?>
                                         <div class="form-group">
                                             <input type="hidden" name="accion" value="2"/>
-                                            <input type="hidden" name="vpag_cod" value="<?php echo $resultado[0]['pag_cod']?>"/>
+                                            <input type="hidden" name="vpag_cod" value="<?php echo $resultado[0]['id_pagina']?>"/>
                                       <div class="form-group">
                                           <label class="control-label col-sm-2">Nombre:</label>
                                           <div class="col-sm-6">
-                                              <input type="text" name="vpag_nombre" id="nombre" class="form-control" required="" autofocus="" value="<?php echo $resultado[0]['pag_nombre']?>"/>
+                                              <input type="text" name="vpag_nombre" id="nombre" class="form-control" required="" autofocus="" value="<?php echo $resultado[0]['nombre']?>"/>
                                           </div>
                                       </div>
                                         <div class="form-group">
                                           <label class="control-label col-sm-2">Dirección:</label>
                                           <div class="col-sm-6">
-                                              <input type="text" name="vpag_direc" id="direccion" class="form-control" required="" value="<?php echo $resultado[0]['pag_direc']?>" />
+                                              <input type="text" name="vpag_direc" id="direccion" class="form-control" required="" value="<?php echo $resultado[0]['direccion']?>" />
                                           </div>
                                       </div>
                                            <!-- AGREGAR LISTA DESPLEGABLE MODULO -->
                                         <div class="form-group">
-                                            <label class="control-label col-lg-2">modulo:</label>
+                                            <label class="control-label col-lg-2">Módulo:</label>
                                             <div class="col-lg-6">
                                               <div class="input-group">
                                                    <?php
-                                                    $sql = "SELECT * FROM modulos ORDER BY CASE WHEN mod_cod='" . $resultado[0]["mod_cod"] . "' THEN 1 ELSE 2 END, mod_cod desc;";
+                                                    $sql = "SELECT * FROM modulos ORDER BY CASE WHEN id_modulo='" . $resultado[0]["id_modulo"] . "' THEN 1 ELSE 2 END, id_modulo desc;";
                                                     $modulos = consultas::get_datos($sql);
                                                     ?>
                                                     <select class="form-control select2" name="vmod_cod" required="">
                                                         <option value="">Seleccione un modulo</option>
-                                                        <option value="<?php echo $modulos[0]['mod_cod'];?>" selected><?php echo $modulos[0]['mod_nombre'];?></option>
+                                                        <option value="<?php echo $modulos[0]['id_modulo'];?>" selected><?php echo $modulos[0]['nombre'];?></option>
                                                         <?php foreach (array_slice($modulos,1) as $modulo) { ?>
-                                                          <option value="<?php echo $modulo['mod_cod'];?>" ><?php echo $modulo['mod_nombre'];?></option>   
+                                                          <option value="<?php echo $modulo['id_modulo'];?>" ><?php echo $modulo['nombre'];?></option>   
                                                         <?php }?>
                                                     </select>  
                                                     <span class="input-group-btn btn-flat">
-                                                        <a class="btn btn-primary" data-title ="Agregar modulo " rel="tooltip" data-placement="top"
+                                                        <a class="btn btn-primary" data-title ="Agregar Módulo" rel="tooltip" data-placement="top"
                                                            data-toggle="modal" data-target="#registrar">
                                                             <i class="fa fa-plus"></i>
                                                         </a>
@@ -103,14 +103,14 @@ and open the template in the editor.
                           <div class="modal-content">
                               <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal" arial-label="Close">x</button>
-                                  <h4 class="modal-title"><i class="fa fa-plus"></i> <strong>Registrar modulo</strong></h4>
+                                  <h4 class="modal-title"><i class="fa fa-plus"></i> <strong>Registrar Módulo</strong></h4>
                               </div>
                               <form action="cargo_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                   <input type="hidden" name="accion" value="5">
                                   <input type="hidden" name="vcar_cod" value="0">
                                   <div class="modal-body">
                                       <div class="form-group">
-                                          <label class="control-label col-sm-3">Agregar una modulo:</label>
+                                          <label class="control-label col-sm-3">Agregar una Módulo:</label>
                                           <div class="col-sm-9">
                                               <input type="text" name="vcar_descri" class="form-control" required="" autofocus=""/>
                                           </div>

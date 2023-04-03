@@ -5,7 +5,7 @@
     //echo "Usuario:".$_REQUEST['usuario'];
     //echo "   Clave:".$_REQUEST['clave'];
 
-    $sql = "select * from v_usuarios where nick='" . $_REQUEST['usuario']
+    $sql = "select * from vista_usuarios where nick='" . $_REQUEST['usuario']
             . "' and clave = md5('".$_REQUEST['clave']."')";
 
     $resultado = consultas::get_datos($sql);
@@ -20,13 +20,13 @@
         $_SESSION['id_usuario'] 	= $resultado[0]['id_usuario'];
         $_SESSION['nick'] 			= $resultado[0]['nick'];
 		$_SESSION['foto']			= "";
-        $_SESSION['id_empleado'] 	= $resultado[0]['id_empleado'];
+        $_SESSION['id_funcionario'] = $resultado[0]['id_funcionario'];
         $_SESSION['nombre_empleado']= $resultado[0]['nombre_empleado'];
         $_SESSION['nombre_cargo']	= $resultado[0]['nombre_cargo'];
         $_SESSION['id_grupo']		= $resultado[0]['id_grupo'];
         $_SESSION['nombre_grupo']	= $resultado[0]['nombre_grupo'];
-        $_SESSION['id_institucion']	= $resultado[0]['id_institucion'];
-        $_SESSION['nombre_institucion']=$resultado[0]['nombre_institucion'];
+        $_SESSION['id_escuela']		= $resultado[0]['id_escuela'];
+        $_SESSION['nombre_escuela']	= $resultado[0]['nombre_escuela'];
          
 		header('location:menu.php');
 	}

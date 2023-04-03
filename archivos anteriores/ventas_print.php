@@ -71,7 +71,7 @@ if (!empty(isset($_REQUEST['opcion']))) {
                             . "where ven_cod in(select ven_cod from detalle_ventas where art_cod in(" . $_REQUEST['varticulo'] . "))");
             break;
         case 4: //empleado
-            $cabeceras = consultas::get_datos("select * from v_ventas where emp_cod in(" . $_REQUEST['vempleado'] . ")");
+            $cabeceras = consultas::get_datos("select * from v_ventas where id_empleado in(" . $_REQUEST['vempleado'] . ")");
             break;
         case 5: //condicion
             $cabeceras = consultas::get_datos("select * from v_ventas where tipo_venta ='" . $_REQUEST['vcondicion'] . "'");

@@ -67,7 +67,7 @@
                                                 <input type="text" class="form-control" value="<?php echo $_SESSION['sucursal'];?>" readonly=""/>                                                
                                             </div>      
                                             <div class="col-lg-6 col-md-6 col-xs-12">
-                                                <label>Empleado:</label>
+                                                <label>empleado:</label>
                                                 <input type="text" class="form-control" value="<?php echo $_SESSION['nombres'];?>" readonly=""/>                                                
                                             </div>                                                  
                                         </div>

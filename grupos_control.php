@@ -9,11 +9,11 @@ $accion = $_REQUEST['accion'];
 
 if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){
     $sql = "select sp_grupos(" . $accion . "," . 
-    (!empty($_REQUEST['vgru_cod']) ? $_REQUEST['vgru_cod'] : 0) . ",'" .
-    (!empty($_REQUEST['vgru_nombre']) ? $_REQUEST['vgru_nombre'] : "") . "') as resul";
+    (!empty($_REQUEST['id_grupo']) ? $_REQUEST[''] : 0) . ",'" .
+    (!empty($_REQUEST['nombre']) ? $_REQUEST['nombre'] : "") . "') as resul";
 }  
 else if (strcmp($accion,"3") == 0){
-    $sql = "select sp_grupos(" . $accion . "," . $_REQUEST['vgru_cod'] . ") as resul";
+    $sql = "select sp_grupos(" . $accion . "," . $_REQUEST['id_grupo'] . ") as resul";
 }
 //echo $sql; return;
 

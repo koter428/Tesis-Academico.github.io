@@ -5,12 +5,12 @@
 CREATE OR REPLACE FUNCTION sp_compras(
     ban integer,
     vcom_cod integer DEFAULT 0,
-    vemp_cod integer DEFAULT 0,
+    vid_empleado integer DEFAULT 0,
     vprv_cod integer DEFAULT 0,
     vtipo_compra character varying DEFAULT ''::character varying,
     vcan_cuota integer DEFAULT 0,
     vcom_plazo integer DEFAULT 0,
-    vid_sucursal integer DEFAULT 0,
+    id_institucion integer DEFAULT 0,
     vped_cod integer)
   RETURNS character varying AS
 $BODY$
@@ -19,7 +19,7 @@ declare ultcom integer;
 begin
 	if ban = 1 then --insertar
 		INSERT INTO compras(com_cod,
-		 emp_cod,
+		 id_empleado,
 		  prv_cod,
 		   com_fecha,
 		    tipo_compra,
@@ -29,11 +29,11 @@ begin
 	                com_estado,
 	                 id_sucursal)
 		    VALUES (calcular_ultimo('compras','com_cod'), 
-		    vemp_cod,
+		    vid_empleado,
 		     vprv_cod,current_date,
 		     vtipo_compra,
 		      vcan_cuota,
-		       vcom_plazo, 0, 'P', vid_sucursal) returning com_cod into ultcom ;	
+		       vcom_plazo, 0, 'P', id_institucion) returning com_cod into ultcom ;	
 		     if vped_cod > 0 then
 			insert into ped_compra
 			(ped_com,com_cod,obs_pedido)

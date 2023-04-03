@@ -91,7 +91,7 @@
                                                                 <td data-title='Código'><?php echo $suc['id_sucursal']; ?></td>
                                                                 <td data-title='Acciones' class="text-center">
                                                                 <?php if ($_SESSION['SUCURSAL']['editar']=='t') { ?>
-                                                                    <a href="sucursal_edit.php?vid_sucursal=<?php echo $suc['id_sucursal']; ?>" class="btn btn-warning btn-sm" role='button' data-title='Editar' rel='tooltip' data-placement='left'>
+                                                                    <a href="sucursal_edit.php?id_institucion=<?php echo $suc['id_sucursal']; ?>" class="btn btn-warning btn-sm" role='button' data-title='Editar' rel='tooltip' data-placement='left'>
                                                                         <span class="glyphicon glyphicon-edit"></span>
                                                                     </a>    <?php }?> 
                                                                     <?php if ($_SESSION['SUCURSAL']['borrar']=='t') { ?>
@@ -164,7 +164,7 @@
         <script>
         function borrar(datos){
             var dat = datos.split("_");
-            $('#si').attr('href','sucursal_control.php?vid_sucursal='+dat[0]+'&vsuc_descri='+dat[1]+'&accion=3');
+            $('#si').attr('href','sucursal_control.php?id_institucion='+dat[0]+'&vsuc_descri='+dat[1]+'&accion=3');
             $('#confirmacion').html('<span class="glyphicon glyphicon-warning-sign"></span> \n\
             Desea borrrar el sucursal <strong>'+dat[1]+'</strong>?');
         }        

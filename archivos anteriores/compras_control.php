@@ -7,7 +7,7 @@ require 'ver_session.php'; /*VERIFICAR SESSION*/
 
     $sql="select sp_compras(".$_REQUEST['accion'].",
     ".$_REQUEST['vcom_cod'].", 
-    ".$_SESSION['emp_cod'].", 
+    ".$_SESSION['id_empleado'].", 
     ".(!empty($_REQUEST['vprv_cod'])?$_REQUEST['vprv_cod']:"0").", 
     ".(!empty($_REQUEST['vtipo_compra'])? "'".$_REQUEST['vtipo_compra']."'":"null").", 
     ".(!empty($_REQUEST['vcan_cuota'])?$_REQUEST['vcan_cuota']:"0").", 

@@ -48,7 +48,7 @@
                                             <div class="col-lg-3 col-md-4 col-sm-3"> 
                                                 <input type="date" name="vaju_fecha" class="form-control" readonly="" value="<?php echo $resultado[0]['aju_fecha'];?>"/>
                                             </div>
-                                            <label class="control-label col-lg-2 col-md-2">Empleado:</label>
+                                            <label class="control-label col-lg-2 col-md-2">empleado:</label>
                                             <div class="col-lg-4 col-md-4 col-sm-4">
                                             <input type="text" class="form-control" value="<?php echo $_SESSION['nombres'];?>" readonly=""/>
                                             </div>                                                                         

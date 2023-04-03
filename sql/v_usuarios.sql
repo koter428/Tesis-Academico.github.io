@@ -1,22 +1,21 @@
-CREATE OR REPLACE VIEW public.v_usuarios
+CREATE OR REPLACE VIEW public.vista_usuarios
  AS
  SELECT u.id_usuario,
     u.nick,
     u.clave,
-    u.id_empleado,
+    u.id_funcionario,
     c.id_cargo,
     c.nombre as nombre_cargo,
-    (e.nombre::text || ' '::text) || e.apellido::text AS nombre_empleado,
+    (f.nombre::text || ' '::text) || f.apellido::text AS nombre_empleado,
     u.id_grupo,
     g.nombre as nombre_grupo,
-    u.id_institucion,
-    i.nombre as nombre_institucion
+    u.id_escuela,
+    i.nombre as nombre_escuela
    FROM usuarios u
-     JOIN empleados e ON u.id_empleado = e.id_empleado
-     JOIN cargos c ON e.id_cargo = c.id_cargo
+     JOIN funcionarios f ON u.id_funcionario = f.id_funcionario
+     JOIN cargos c ON f.id_cargo = c.id_cargo
      JOIN usuarios_grupos g ON u.id_grupo = g.id_grupo
-     JOIN instituciones i ON u.id_institucion = i.id_institucion;
+     JOIN escuelas i ON u.id_escuela = i.id_escuela;
 
-ALTER TABLE public.v_usuarios
+ALTER TABLE public.vista_usuarios
     OWNER TO postgres;
-

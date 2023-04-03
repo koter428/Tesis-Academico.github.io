@@ -42,7 +42,7 @@
                                             <div class="col-lg-4 col-md-4 col-sm-5"> 
                                                 <input type="date" name="vaju_fecha" class="form-control" readonly="" value="<?php echo $fecha[0]['fecha'];?>"/>
                                             </div>
-                                            <label class="control-label col-lg-2 col-md-2">Empleado:</label>
+                                            <label class="control-label col-lg-2 col-md-2">empleado:</label>
                                             <div class="col-lg-4 col-md-4 col-sm-5">
                                             <input type="text" class="form-control" value="<?php echo $_SESSION['nombres'];?>" readonly=""/>
                                             </div>                                            

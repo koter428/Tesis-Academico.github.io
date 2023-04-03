@@ -42,16 +42,16 @@ begin
 	SET 
           usu_nick = COALESCE(trim(lower(_nick)), usu_nick),
           usu_clave = vusu_clave, 
-          emp_cod = COALESCE(id_empleado, id_empleado), 
+          id_empleado = COALESCE(id_empleado, id_empleado), 
           gru_cod = COALESCE(id_grupo, id_grupo), 
           id_sucursal = COALESCE(id_institucion, id_institucion)
         WHERE usu_cod = vusu_cod
 	    AND (
 	      vusu_nick IS NOT NULL AND nick IS DISTINCT FROM usu_nick OR
 	      vusu_clave IS NOT NULL AND clave IS DISTINCT FROM usu_clave OR
-	      vemp_cod IS NOT NULL AND id_empleado IS DISTINCT FROM emp_cod OR
+	      vid_empleado IS NOT NULL AND id_empleado IS DISTINCT FROM id_empleado OR
 	      vgru_cod IS NOT NULL AND id_grupo IS DISTINCT FROM gru_cod OR
-	      vid_sucursal IS NOT NULL AND id_institucion IS DISTINCT FROM id_sucursal
+	      id_institucion IS NOT NULL AND id_institucion IS DISTINCT FROM id_sucursal
 	    );  
 
     GET DIAGNOSTICS affectedRows = ROW_COUNT;

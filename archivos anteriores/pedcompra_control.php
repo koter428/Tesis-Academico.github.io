@@ -11,9 +11,9 @@
     if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){
         $sql = "select sp_pedcompra(" . $accion . "," . 
                 (!empty($_REQUEST['vped_com']) ? $_REQUEST['vped_com'] : 0) . ",'" .
-                (!empty($_REQUEST['vemp_cod']) ? strtoupper($_REQUEST['vemp_cod']) : 0) . "','" .
+                (!empty($_REQUEST['vid_empleado']) ? strtoupper($_REQUEST['vid_empleado']) : 0) . "','" .
                 (!empty($_REQUEST['vprv_cod']) ? strtoupper($_REQUEST['vprv_cod']) : 0) . "','" .
-                (!empty($_REQUEST['vid_sucursal']) ?$_REQUEST['vid_sucursal'] : 1). "') as resul";
+                (!empty($_REQUEST['id_institucion']) ?$_REQUEST['id_institucion'] : 1). "') as resul";
         }
     else if (strcmp($accion,"3") == 0){
         $sql = "select sp_pedcompra(" . $accion . "," . $_REQUEST['vped_com'].") as resul";

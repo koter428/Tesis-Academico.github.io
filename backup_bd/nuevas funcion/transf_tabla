@@ -5,14 +5,14 @@ DROP TABLE IF EXISTS public.transferencias;
 CREATE TABLE IF NOT EXISTS public.transferencias
 (
     tra_cod integer NOT NULL,
-    emp_cod integer NOT NULL,
+    id_empleado integer NOT NULL,
     tra_fecha date NOT NULL,
     tra_total integer NOT NULL,
     tra_obser character varying(100) COLLATE pg_catalog."default",
     id_sucursal integer NOT NULL,
     CONSTRAINT transferencias_pk PRIMARY KEY (tra_cod),
-    CONSTRAINT empleado_transferencias_fk FOREIGN KEY (emp_cod)
-        REFERENCES public.empleado (emp_cod) MATCH SIMPLE
+    CONSTRAINT empleado_transferencias_fk FOREIGN KEY (id_empleado)
+        REFERENCES public.empleado (id_empleado) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT sucursal_transferencias_fk FOREIGN KEY (id_sucursal)

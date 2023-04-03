@@ -4,8 +4,8 @@
 
 CREATE OR REPLACE VIEW v_compras AS 
 SELECT a.com_cod,
-    a.emp_cod,
-    (b.emp_nombre::text || ' '::text) || b.emp_apellido::text AS empleado,
+    a.id_empleado,
+    (b.nombre_empleado::text || ' '::text) || b.nombre_empleado::text AS empleado,
     a.prv_cod,
     c.prv_ruc,
     (c.prv_razonsocial::text || ' '::text) As proveedores,
@@ -24,7 +24,7 @@ SELECT a.com_cod,
     convertir_letra(a.com_total::numeric) AS totalletra,
     COALESCE(e.ped_com, 0) AS ped_cod
    FROM compras a
-     JOIN empleado b ON a.emp_cod = b.emp_cod
+     JOIN empleado b ON a.id_empleado = b.id_empleado
      JOIN proveedor c ON a.prv_cod = c.prv_cod
      JOIN sucursal d ON a.id_sucursal = d.id_sucursal
      LEFT JOIN ped_compra e ON a.com_cod = e.com_cod;

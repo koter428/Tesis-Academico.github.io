@@ -25,14 +25,14 @@ ALTER TABLE IF EXISTS public.ajustes_motivos
 CREATE TABLE IF NOT EXISTS public.ajustes
 (
     aju_cod integer NOT NULL,
-    emp_cod integer NOT NULL,
+    id_empleado integer NOT NULL,
     aju_fecha date NOT NULL,
     aju_total integer NOT NULL,
     aju_obser character varying(100) COLLATE pg_catalog."default" NULL,
 	id_sucursal integer NOT NULL,
     CONSTRAINT ajustes_pk PRIMARY KEY (aju_cod),
-    CONSTRAINT empleado_ajustes_fk FOREIGN KEY (emp_cod)
-        REFERENCES public.empleado (emp_cod) MATCH SIMPLE
+    CONSTRAINT empleado_ajustes_fk FOREIGN KEY (id_empleado)
+        REFERENCES public.empleado (id_empleado) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT sucursal_ajustes_fk FOREIGN KEY (id_sucursal)

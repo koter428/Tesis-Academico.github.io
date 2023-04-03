@@ -1,14 +1,14 @@
 ﻿create or replace function sp_pedventas(ban integer,
-vped_cod integer, vemp_cod integer, vcli_cod integer, vid_sucursal integer)
+vped_cod integer, vid_empleado integer, vcli_cod integer, id_institucion integer)
 returns varchar as
 $$
 declare mensaje varchar;
 begin
 	if ban = 1 then --insertar
-		INSERT INTO pedido_cabventa(ped_cod, ped_fecha, emp_cod, cli_cod, estado, 
+		INSERT INTO pedido_cabventa(ped_cod, ped_fecha, id_empleado, cli_cod, estado, 
 		id_sucursal)
 		    VALUES (calcular_ultimo('pedido_cabventa','ped_cod'), current_date,
-		    vemp_cod, vcli_cod, 'P', vid_sucursal);
+		    vid_empleado, vcli_cod, 'P', id_institucion);
 		    mensaje = 'Se inserto correctamente el pedido de venta';	
 	end if; 
 	if ban = 2 then --modificar

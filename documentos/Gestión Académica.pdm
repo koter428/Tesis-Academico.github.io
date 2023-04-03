@@ -6221,8 +6221,8 @@ LABL 0 Arial,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o167">
 <a:ObjectID>8A851F72-D150-4E7D-88CD-816C70AFEA57</a:ObjectID>
-<a:Name>id_dpto</a:Name>
-<a:Code>ID_DPTO</a:Code>
+<a:Name>id_departamentos</a:Name>
+<a:Code>ID_departamentos</a:Code>
 <a:CreationDate>1656818047</a:CreationDate>
 <a:Creator>jeferzon</a:Creator>
 <a:ModificationDate>1656818078</a:ModificationDate>
@@ -7533,8 +7533,8 @@ LABL 0 Arial,8,N</a:FontList>
 <c:Columns>
 <o:Column Id="o245">
 <a:ObjectID>311541C1-3C8D-42BA-AC1D-ED846D141F08</a:ObjectID>
-<a:Name>id_dpto</a:Name>
-<a:Code>ID_DPTO</a:Code>
+<a:Name>id_departamentos</a:Name>
+<a:Code>ID_departamentos</a:Code>
 <a:CreationDate>1656817955</a:CreationDate>
 <a:Creator>jeferzon</a:Creator>
 <a:ModificationDate>1656818042</a:ModificationDate>
@@ -7633,8 +7633,8 @@ LABL 0 Arial,8,N</a:FontList>
 </o:Table>
 <o:Table Id="o132">
 <a:ObjectID>4A164F2F-7494-4CFA-A046-B6F08F9238C8</a:ObjectID>
-<a:Name>Empleados</a:Name>
-<a:Code>EMPLEADOS</a:Code>
+<a:Name>empleado</a:Name>
+<a:Code>empleado</a:Code>
 <a:CreationDate>1656818164</a:CreationDate>
 <a:Creator>jeferzon</a:Creator>
 <a:ModificationDate>1656884180</a:ModificationDate>
@@ -7644,7 +7644,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:Column Id="o251">
 <a:ObjectID>EFE23706-2AAC-4C74-A450-F08ECACE02DD</a:ObjectID>
 <a:Name>id_empleado</a:Name>
-<a:Code>ID_EMPLEADO</a:Code>
+<a:Code>ID_empleado</a:Code>
 <a:CreationDate>1656818164</a:CreationDate>
 <a:Creator>jeferzon</a:Creator>
 <a:ModificationDate>1656818677</a:ModificationDate>

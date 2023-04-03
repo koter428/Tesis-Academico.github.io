@@ -1,74 +1,54 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     27/2/2023 22:24:23                           */
+/* Created on:     27/3/2023 16:26:09                           */
 /*==============================================================*/
 
 
 drop table ALUMNOS;
 
-drop table AULAS;
-
-drop table AULASXCURSOS;
-
 drop table BARRIOS;
-
-drop table CAPACIDADES;
 
 drop table CARGOS;
 
 drop table CIUDADES;
 
-drop table CONTENIDOS;
-
 drop table CURSOS;
-
-drop table CURSOSPLANIFICACION;
-
-drop table CURSOS_TURNOS;
-
-drop index DEPARTAMENTOS_NOMBRE;
 
 drop table DEPARTAMENTOS;
 
-drop table EMPLEADOS;
+drop table ESCUELAS;
 
-drop table EXAMENES;
-
-drop table EXAMENES_CONTENIDOS;
-
-drop table FERIADOS;
+drop table FUNCIONARIOS;
 
 drop table INSCRIPCIONES;
 
-drop table INSCRIPCIONES_DETALLES;
+drop table MODULOS;
 
-drop index INSTITUCIONES_NOMBRE;
+drop table OCUPACIONES;
 
-drop table INSTITUCIONES;
-
-drop table MATERIAS;
-
-drop table MODALIDADES;
-
-drop table NIVELES;
+drop table PAGINAS;
 
 drop table PARENTESCOS;
 
-drop table PERIODOS_ACADEMICOS;
+drop table PERIODOS_LECTIVOS;
 
-drop table RECURSOS;
+drop table PERMISOS;
 
-drop table RECURSOSXCONTENIDO;
-
-drop table REQUISITOS_DETALLES;
-
-drop table REQUISITO_INSCRIPCION;
+drop table TIPOS_EDUCACION;
 
 drop table TURNOS;
+
+drop table TURNOS_ESCUELAS;
 
 drop table TUTORES;
 
 drop table TUTORESALUMNOS;
+
+drop table USUARIOS;
+
+drop table USUARIOS_GRUPOS;
+
+drop domain D_BOOLEAN;
 
 drop domain D_CHAR1;
 
@@ -93,6 +73,11 @@ drop domain D_VARCHAR60;
 drop sequence SEQUENCE_1;
 
 create sequence SEQUENCE_1;
+
+/*==============================================================*/
+/* Domain: D_BOOLEAN                                            */
+/*==============================================================*/
+create domain D_BOOLEAN as BOOL;
 
 /*==============================================================*/
 /* Domain: D_CHAR1                                              */
@@ -168,30 +153,6 @@ create table ALUMNOS (
 );
 
 /*==============================================================*/
-/* Table: AULAS                                                 */
-/*==============================================================*/
-create table AULAS (
-   ID_AULA              SERIAL               not null,
-   ID_INSTITUCION       D_INT2               not null,
-   NOMBRE               D_VARCHAR60          not null,
-   ESTADO               D_CHAR1              not null,
-   constraint PK_AULAS primary key (ID_AULA)
-);
-
-/*==============================================================*/
-/* Table: AULASXCURSOS                                          */
-/*==============================================================*/
-create table AULASXCURSOS (
-   ID_AULA_CURSO        SERIAL               not null,
-   ID_PERIODO           INT4                 not null,
-   ID_CURSO             INT4                 not null,
-   ID_AULA              INT4                 not null,
-   ID_TURNO             INT4                 not null,
-   ID_PROFESOR          INT4                 not null,
-   constraint PK_AULASXCURSOS primary key (ID_AULA_CURSO)
-);
-
-/*==============================================================*/
 /* Table: BARRIOS                                               */
 /*==============================================================*/
 create table BARRIOS (
@@ -199,17 +160,6 @@ create table BARRIOS (
    NOMBRE               D_VARCHAR60          not null,
    ID_CIUDAD            D_INT4               not null,
    constraint PK_BARRIOS primary key (ID_BARRIO)
-);
-
-/*==============================================================*/
-/* Table: CAPACIDADES                                           */
-/*==============================================================*/
-create table CAPACIDADES (
-   ID_CAPACIDAD         SERIAL               not null,
-   ID_CONTENIDO         INT4                 not null,
-   NOMBRE               D_VARCHAR60          not null,
-   DESCRIPCION          D_VARCHAR300         not null,
-   constraint PK_CAPACIDADES primary key (ID_CAPACIDAD)
 );
 
 /*==============================================================*/
@@ -226,21 +176,9 @@ create table CARGOS (
 /*==============================================================*/
 create table CIUDADES (
    ID_CIUDAD            SERIAL               not null,
-   ID_DPTO              INT4                 not null,
+   ID_departamentos              INT4                 not null,
    NOMBRE               D_VARCHAR60          not null,
    constraint PK_CIUDADES primary key (ID_CIUDAD)
-);
-
-/*==============================================================*/
-/* Table: CONTENIDOS                                            */
-/*==============================================================*/
-create table CONTENIDOS (
-   ID_CONTENIDO         SERIAL               not null,
-   ID_MATERIA           INT4                 not null,
-   NOMBRE               D_VARCHAR60          not null,
-   DESCRIPCION          D_VARCHAR300         not null,
-   FECHA_DESARROLLO     D_DATE               null,
-   constraint PK_CONTENIDOS primary key (ID_CONTENIDO)
 );
 
 /*==============================================================*/
@@ -248,12 +186,11 @@ create table CONTENIDOS (
 /*==============================================================*/
 create table CURSOS (
    ID_CURSO             SERIAL               not null,
+   ID_ESCUELA           INT4                 not null,
+   ID_TIPO              INT4                 not null,
+   ID_TURNO             INT4                 not null,
    NOMBRE               D_VARCHAR60          not null,
-   ID_INSTITUCION       D_INT4               not null,
-   ID_MODALIDAD         D_INT4               not null,
-   ID_NIVEL             INT4                 not null,
-   ID_CURSO_ANTERIOR    INT4                 null,
-   VIGENTE              D_CHAR1              not null,
+   ACTIVO               D_CHAR1              not null,
    constraint PK_CURSOS primary key (ID_CURSO)
 );
 
@@ -261,53 +198,42 @@ comment on table CURSOS is
 'vigente: si/no';
 
 /*==============================================================*/
-/* Table: CURSOSPLANIFICACION                                   */
-/*==============================================================*/
-create table CURSOSPLANIFICACION (
-   ID_CALENDARIO        SERIAL               not null,
-   ID_AULA_CURSO        INT4                 not null,
-   DIA                  D_INT2               not null,
-   MES                  D_INT2               not null,
-   DESDE                D_TIME               not null,
-   HASTA                D_TIME               not null,
-   OBSERVACION          D_VARCHAR60          null,
-   constraint PK_CURSOSPLANIFICACION primary key (ID_CALENDARIO)
-);
-
-comment on table CURSOSPLANIFICACION is
-'dias: 1-domingo, 2-lunes, 3-martes, 4-miércoles, 5-jueves, 6-viernes, 7-sabado';
-
-/*==============================================================*/
-/* Table: CURSOS_TURNOS                                         */
-/*==============================================================*/
-create table CURSOS_TURNOS (
-   ID_CURSO             INT4                 not null,
-   ID_TURNO             INT4                 not null,
-   SECCION              D_CHAR1              not null,
-   constraint PK_CURSOS_TURNOS primary key (ID_CURSO, ID_TURNO)
-);
-
-/*==============================================================*/
 /* Table: DEPARTAMENTOS                                         */
 /*==============================================================*/
 create table DEPARTAMENTOS (
-   ID_DPTO              SERIAL               not null,
+   ID_departamentos              SERIAL               not null,
    NOMBRE               D_VARCHAR60          not null,
-   constraint PK_DEPARTAMENTOS primary key (ID_DPTO)
+   constraint PK_DEPARTAMENTOS primary key (ID_departamentos)
 );
 
 /*==============================================================*/
-/* Index: DEPARTAMENTOS_NOMBRE                                  */
+/* Table: ESCUELAS                                              */
 /*==============================================================*/
-create unique index DEPARTAMENTOS_NOMBRE on DEPARTAMENTOS (
-NOMBRE
+create table ESCUELAS (
+   ID_ESCUELA           SERIAL               not null,
+   NOMBRE               D_VARCHAR60          not null,
+   DIRECCION            D_VARCHAR120         not null,
+   ID_BARRIO            D_INT4               not null,
+   TELEFONO             D_VARCHAR15          not null,
+   EMAIL                D_VARCHAR60          not null,
+   CORREO               D_VARCHAR15          not null,
+   ESCUELA              D_CHAR1              not null,
+   COLEGIO              D_CHAR1              not null,
+   FECHA_INAUGURACION   D_DATE               null,
+   ACTIVO               D_CHAR1              not null,
+   constraint PK_ESCUELAS primary key (ID_ESCUELA)
 );
 
+comment on table ESCUELAS is
+'escuela: Valores SI/NO
+colegio: Valores SI/NO
+al seleccionar la ciudad, ya trae el barrio y departamento.';
+
 /*==============================================================*/
-/* Table: EMPLEADOS                                             */
+/* Table: FUNCIONARIOS                                          */
 /*==============================================================*/
-create table EMPLEADOS (
-   ID_EMPLEADO          SERIAL               not null,
+create table FUNCIONARIOS (
+   ID_empleado          SERIAL               not null,
    NOMBRE               D_VARCHAR60          not null,
    APELLIDO             D_VARCHAR60          not null,
    NRO_DOCUMENTO        D_VARCHAR15          not null,
@@ -321,43 +247,8 @@ create table EMPLEADOS (
    SEXO                 D_CHAR1              not null,
    ESTADO               D_CHAR1              not null,
    FECHA_INGRESO        D_TIMESTAMP          not null,
-   constraint PK_EMPLEADOS primary key (ID_EMPLEADO)
+   constraint PK_FUNCIONARIOS primary key (ID_empleado)
 );
-
-/*==============================================================*/
-/* Table: EXAMENES                                              */
-/*==============================================================*/
-create table EXAMENES (
-   ID_EXAMEN            SERIAL               not null,
-   ID_CURSO             INT4                 not null,
-   ID_MATERIA           INT4                 not null,
-   FECHA                D_DATE               not null,
-   constraint PK_EXAMENES primary key (ID_EXAMEN)
-);
-
-/*==============================================================*/
-/* Table: EXAMENES_CONTENIDOS                                   */
-/*==============================================================*/
-create table EXAMENES_CONTENIDOS (
-   ID_EXAMEN            INT4                 not null,
-   ID_CONTENIDO         INT4                 not null,
-   constraint PK_EXAMENES_CONTENIDOS primary key (ID_EXAMEN)
-);
-
-/*==============================================================*/
-/* Table: FERIADOS                                              */
-/*==============================================================*/
-create table FERIADOS (
-   ID_FERIADO           SERIAL               not null,
-   NOMBRE               D_VARCHAR60          not null,
-   DIA                  D_INT2               not null,
-   MES                  D_INT2               not null,
-   VIGENTE              D_CHAR1              not null,
-   constraint PK_FERIADOS primary key (ID_FERIADO)
-);
-
-comment on table FERIADOS is
-'Tabla Libre, no necesita relacionarse con ninguna otra, se consulta directo.';
 
 /*==============================================================*/
 /* Table: INSCRIPCIONES                                         */
@@ -379,9 +270,12 @@ create table INSCRIPCIONES (
    CURSO_REPITIO        D_CHAR1              not null,
    MOTIVO_REPETICION    D_VARCHAR60          null,
    ID_TUTOR1            INT4                 null,
+   ID_OCUPACION_TUTOR1  INT4                 null,
    ID_TUTOR2            INT4                 null,
+   ID_OCUPACION_TUTOR2  INT4                 null,
    TIEMPO_EN_FAMILIA    D_INT2               null,
-   FECHA_INSCRIPCION    D_TIMESTAMP          null,
+   ID_USUARIO           INT4                 not null,
+   FECHA_INSCRIPCION    D_TIMESTAMP          not null,
    constraint PK_INSCRIPCIONES primary key (ID_INSCRIPCION)
 );
 
@@ -389,78 +283,36 @@ comment on table INSCRIPCIONES is
 'Tutor1 y Tutor2 representan a padre y madre del formulario';
 
 /*==============================================================*/
-/* Table: INSCRIPCIONES_DETALLES                                */
+/* Table: MODULOS                                               */
 /*==============================================================*/
-create table INSCRIPCIONES_DETALLES (
-   ID_INSCRIPCION       INT4                 not null,
-   TIPO_DOCUMENTO       D_CHAR1              not null,
-   IMAGEN_DOCUMENTO     BYTEA                not null,
-   constraint PK_INSCRIPCIONES_DETALLES primary key (ID_INSCRIPCION, TIPO_DOCUMENTO)
+create table MODULOS (
+   ID_MODULO            SERIAL               not null,
+   NOMBRE               D_VARCHAR60          not null,
+   constraint PK_MODULOS primary key (ID_MODULO)
 );
 
-comment on table INSCRIPCIONES_DETALLES is
-'CI, Pasaporte, Certificado Nacimiento';
+/*==============================================================*/
+/* Table: OCUPACIONES                                           */
+/*==============================================================*/
+create table OCUPACIONES (
+   ID_OCUPACION         SERIAL               not null,
+   NOMBRE               D_VARCHAR60          not null,
+   constraint PK_OCUPACIONES primary key (ID_OCUPACION)
+);
+
+comment on table OCUPACIONES is
+'Ocupaciones de tutores.';
 
 /*==============================================================*/
-/* Table: INSTITUCIONES                                         */
+/* Table: PAGINAS                                               */
 /*==============================================================*/
-create table INSTITUCIONES (
-   ID_INSTITUCION       SERIAL               not null,
-   NOMBRE               D_VARCHAR60          not null,
+create table PAGINAS (
+   ID_PAGINA            SERIAL               not null,
    DIRECCION            D_VARCHAR120         not null,
-   ID_BARRIO            D_INT4               not null,
-   TELEFONO             D_VARCHAR15          not null,
-   EMAIL                D_VARCHAR60          not null,
-   CORREO               D_VARCHAR15          not null,
-   TIPO                 D_CHAR1              not null,
-   constraint PK_INSTITUCIONES primary key (ID_INSTITUCION)
-);
-
-comment on table INSTITUCIONES is
-'tipo: privado, público';
-
-/*==============================================================*/
-/* Index: INSTITUCIONES_NOMBRE                                  */
-/*==============================================================*/
-create unique index INSTITUCIONES_NOMBRE on INSTITUCIONES (
-NOMBRE
-);
-
-/*==============================================================*/
-/* Table: MATERIAS                                              */
-/*==============================================================*/
-create table MATERIAS (
-   ID_MATERIA           SERIAL               not null,
-   ID_CURSO             D_INT2               not null,
    NOMBRE               D_VARCHAR60          not null,
-   OBSERVACION          D_VARCHAR300         null,
-   ESTADO               D_CHAR1              not null,
-   constraint PK_MATERIAS primary key (ID_MATERIA)
+   ID_MODULO            INT4                 not null,
+   constraint PK_PAGINAS primary key (ID_PAGINA)
 );
-
-/*==============================================================*/
-/* Table: MODALIDADES                                           */
-/*==============================================================*/
-create table MODALIDADES (
-   ID_MODALIDAD         SERIAL               not null,
-   NOMBRE               D_VARCHAR60          not null,
-   constraint PK_MODALIDADES primary key (ID_MODALIDAD)
-);
-
-comment on table MODALIDADES is
-'EI, EEB, EM, AA';
-
-/*==============================================================*/
-/* Table: NIVELES                                               */
-/*==============================================================*/
-create table NIVELES (
-   ID_NIVEL             SERIAL               not null,
-   NOMBRE               D_VARCHAR60          not null,
-   constraint PK_NIVELES primary key (ID_NIVEL)
-);
-
-comment on table NIVELES is
-'Primario, Secundario, Terciario';
 
 /*==============================================================*/
 /* Table: PARENTESCOS                                           */
@@ -472,55 +324,35 @@ create table PARENTESCOS (
 );
 
 /*==============================================================*/
-/* Table: PERIODOS_ACADEMICOS                                   */
+/* Table: PERIODOS_LECTIVOS                                     */
 /*==============================================================*/
-create table PERIODOS_ACADEMICOS (
+create table PERIODOS_LECTIVOS (
    ID_PERIODO           SERIAL               not null,
-   NOMBRE               D_VARCHAR60          not null,
+   ANO                  D_INT2               not null,
    VIGENTE              D_VARCHAR60          not null,
-   constraint PK_PERIODOS_ACADEMICOS primary key (ID_PERIODO)
+   constraint PK_PERIODOS_LECTIVOS primary key (ID_PERIODO)
 );
 
 /*==============================================================*/
-/* Table: RECURSOS                                              */
+/* Table: PERMISOS                                              */
 /*==============================================================*/
-create table RECURSOS (
-   ID_RECURSO           SERIAL               not null,
+create table PERMISOS (
+   ID_PAGINA            INT4                 not null,
+   ID_GRUPO             INT4                 not null,
+   LEER                 D_BOOLEAN            not null,
+   INSERTAR             D_BOOLEAN            not null,
+   EDITAR               D_BOOLEAN            not null,
+   BORRAR               D_BOOLEAN            not null,
+   constraint PK_PERMISOS primary key (ID_PAGINA, ID_GRUPO)
+);
+
+/*==============================================================*/
+/* Table: TIPOS_EDUCACION                                       */
+/*==============================================================*/
+create table TIPOS_EDUCACION (
+   ID_TIPO              SERIAL               not null,
    NOMBRE               D_VARCHAR60          not null,
-   DESCRIPCION          D_VARCHAR300         not null,
-   constraint PK_RECURSOS primary key (ID_RECURSO)
-);
-
-/*==============================================================*/
-/* Table: RECURSOSXCONTENIDO                                    */
-/*==============================================================*/
-create table RECURSOSXCONTENIDO (
-   ID_CONTENIDO         INT4                 not null,
-   ID_RECURSO           INT4                 not null,
-   constraint PK_RECURSOSXCONTENIDO primary key (ID_RECURSO, ID_CONTENIDO)
-);
-
-/*==============================================================*/
-/* Table: REQUISITOS_DETALLES                                   */
-/*==============================================================*/
-create table REQUISITOS_DETALLES (
-   ID_REQUISITO         D_INT4               not null,
-   ITEM                 D_INT4               not null,
-   REQUISITO            D_VARCHAR300         not null,
-   constraint PK_REQUISITOS_DETALLES primary key (ID_REQUISITO, ITEM)
-);
-
-/*==============================================================*/
-/* Table: REQUISITO_INSCRIPCION                                 */
-/*==============================================================*/
-create table REQUISITO_INSCRIPCION (
-   ID_REQUISITO         D_INT4               not null,
-   ID_INSTITUCION       D_INT4               not null,
-   ID_PERIODO           INT4                 not null,
-   FECHA_DESDE          D_DATE               not null,
-   FECHA_HASTA          D_DATE               not null,
-   FECHA_REGISTRO       D_DATE               not null,
-   constraint PK_REQUISITO_INSCRIPCION primary key (ID_REQUISITO)
+   constraint PK_TIPOS_EDUCACION primary key (ID_TIPO)
 );
 
 /*==============================================================*/
@@ -530,6 +362,17 @@ create table TURNOS (
    ID_TURNO             SERIAL               not null,
    NOMBRE               D_VARCHAR60          not null,
    constraint PK_TURNOS primary key (ID_TURNO)
+);
+
+/*==============================================================*/
+/* Table: TURNOS_ESCUELAS                                       */
+/*==============================================================*/
+create table TURNOS_ESCUELAS (
+   ID_ESCUELA           INT4                 not null,
+   ID_TURNO             INT4                 not null,
+   DESDE                D_TIME               not null,
+   HASTA                D_TIME               not null,
+   constraint PK_TURNOS_ESCUELAS primary key (ID_ESCUELA, ID_TURNO)
 );
 
 /*==============================================================*/
@@ -564,114 +407,81 @@ create table TUTORESALUMNOS (
    constraint PK_TUTORESALUMNOS primary key (ID_ALUMNO, ID_TUTOR)
 );
 
-alter table AULASXCURSOS
-   add constraint FK_AULASXCU_REFERENCE_PERIODOS foreign key (ID_PERIODO)
-      references PERIODOS_ACADEMICOS (ID_PERIODO)
-      on delete restrict on update restrict;
+/*==============================================================*/
+/* Table: USUARIOS                                              */
+/*==============================================================*/
+create table USUARIOS (
+   ID_USUARIO           SERIAL               not null,
+   NICK                 D_VARCHAR15          not null,
+   CLAVE                D_VARCHAR60          not null,
+   ID_GRUPO             INT4                 not null,
+   ID_empleado          INT4                 not null,
+   ID_INSTITUCION       INT4                 not null,
+   constraint PK_USUARIOS primary key (ID_USUARIO)
+);
 
-alter table AULASXCURSOS
-   add constraint FK_AULASXCU_REFERENCE_CURSOS foreign key (ID_CURSO)
-      references CURSOS (ID_CURSO)
-      on delete restrict on update restrict;
-
-alter table AULASXCURSOS
-   add constraint FK_AULASXCU_REFERENCE_AULAS foreign key (ID_AULA)
-      references AULAS (ID_AULA)
-      on delete restrict on update restrict;
-
-alter table AULASXCURSOS
-   add constraint FK_AULASXCU_REFERENCE_TURNOS foreign key (ID_TURNO)
-      references TURNOS (ID_TURNO)
-      on delete restrict on update restrict;
-
-alter table AULASXCURSOS
-   add constraint FK_AULASXCU_REFERENCE_EMPLEADO foreign key (ID_PROFESOR)
-      references EMPLEADOS (ID_EMPLEADO)
-      on delete restrict on update restrict;
+/*==============================================================*/
+/* Table: USUARIOS_GRUPOS                                       */
+/*==============================================================*/
+create table USUARIOS_GRUPOS (
+   ID_GRUPO             SERIAL               not null,
+   NOMBRE               D_VARCHAR60          not null,
+   constraint PK_USUARIOS_GRUPOS primary key (ID_GRUPO)
+);
 
 alter table BARRIOS
    add constraint FK_BARRIOS_REFERENCE_CIUDADES foreign key (ID_CIUDAD)
       references CIUDADES (ID_CIUDAD)
       on delete restrict on update restrict;
 
-alter table CAPACIDADES
-   add constraint FK_CAPACIDA_REFERENCE_CONTENID foreign key (ID_CONTENIDO)
-      references CONTENIDOS (ID_CONTENIDO)
-      on delete restrict on update restrict;
-
 alter table CIUDADES
-   add constraint FK_CIUDADES_REFERENCE_DEPARTAM foreign key (ID_DPTO)
-      references DEPARTAMENTOS (ID_DPTO)
-      on delete restrict on update restrict;
-
-alter table CONTENIDOS
-   add constraint FK_CONTENID_REFERENCE_MATERIAS foreign key (ID_MATERIA)
-      references MATERIAS (ID_MATERIA)
+   add constraint FK_CIUDADES_REFERENCE_DEPARTAM foreign key (ID_departamentos)
+      references DEPARTAMENTOS (ID_departamentos)
       on delete restrict on update restrict;
 
 alter table CURSOS
-   add constraint FK_CURSOS_REFERENCE_NIVELES foreign key (ID_NIVEL)
-      references NIVELES (ID_NIVEL)
+   add constraint FK_CURSOS_REFERENCE_ESCUELAS foreign key (ID_ESCUELA)
+      references ESCUELAS (ID_ESCUELA)
       on delete restrict on update restrict;
 
 alter table CURSOS
-   add constraint FK_CURSOS_REFERENCE_MODALIDA foreign key (ID_MODALIDAD)
-      references MODALIDADES (ID_MODALIDAD)
+   add constraint FK_CURSOS_REFERENCE_TIPOS_ED foreign key (ID_TIPO)
+      references TIPOS_EDUCACION (ID_TIPO)
       on delete restrict on update restrict;
 
 alter table CURSOS
-   add constraint FK_CURSOS_REFERENCE_CURSOS foreign key (ID_CURSO_ANTERIOR)
-      references CURSOS (ID_CURSO)
-      on delete restrict on update restrict;
-
-alter table CURSOS
-   add constraint FK_CURSOS_REFERENCE_INSTITUC foreign key (ID_INSTITUCION)
-      references INSTITUCIONES (ID_INSTITUCION)
-      on delete restrict on update restrict;
-
-alter table CURSOSPLANIFICACION
-   add constraint FK_CURSOSPL_REFERENCE_AULASXCU foreign key (ID_AULA_CURSO)
-      references AULASXCURSOS (ID_AULA_CURSO)
-      on delete restrict on update restrict;
-
-alter table CURSOS_TURNOS
-   add constraint FK_CURSOS_T_REFERENCE_TURNOS foreign key (ID_TURNO)
+   add constraint FK_CURSOS_REFERENCE_TURNOS foreign key (ID_TURNO)
       references TURNOS (ID_TURNO)
       on delete restrict on update restrict;
 
-alter table CURSOS_TURNOS
-   add constraint FK_CURSOS_T_REFERENCE_CURSOS foreign key (ID_CURSO)
-      references CURSOS (ID_CURSO)
-      on delete cascade on update restrict;
+alter table ESCUELAS
+   add constraint FK_ESCUELAS_REFERENCE_BARRIOS foreign key (ID_BARRIO)
+      references BARRIOS (ID_BARRIO)
+      on delete restrict on update restrict;
 
-alter table EMPLEADOS
-   add constraint FK_EMPLEADO_REFERENCE_CARGOS foreign key (ID_CARGO)
+alter table FUNCIONARIOS
+   add constraint FK_FUNCIONA_REFERENCE_CARGOS foreign key (ID_CARGO)
       references CARGOS (ID_CARGO)
       on delete restrict on update restrict;
 
-alter table EXAMENES
-   add constraint FK_EXAMENES_REFERENCE_CURSOS foreign key (ID_CURSO)
-      references CURSOS (ID_CURSO)
+alter table INSCRIPCIONES
+   add constraint FK_INSCRIPC_REFERENCE_OCUPACIO1 foreign key (ID_OCUPACION_TUTOR1)
+      references OCUPACIONES (ID_OCUPACION)
       on delete restrict on update restrict;
 
-alter table EXAMENES
-   add constraint FK_EXAMENES_REFERENCE_MATERIAS foreign key (ID_MATERIA)
-      references MATERIAS (ID_MATERIA)
-      on delete cascade on update restrict;
-
-alter table EXAMENES_CONTENIDOS
-   add constraint FK_EXAMENES_REFERENCE_EXAMENES foreign key (ID_EXAMEN)
-      references EXAMENES (ID_EXAMEN)
+alter table INSCRIPCIONES
+   add constraint FK_INSCRIPC_REFERENCE_OCUPACIO2 foreign key (ID_OCUPACION_TUTOR2)
+      references OCUPACIONES (ID_OCUPACION)
       on delete restrict on update restrict;
 
-alter table EXAMENES_CONTENIDOS
-   add constraint FK_EXAMENES_REFERENCE_CONTENID foreign key (ID_CONTENIDO)
-      references CONTENIDOS (ID_CONTENIDO)
+alter table INSCRIPCIONES
+   add constraint FK_INSCRIPC_REFERENCE_USUARIOS foreign key (ID_USUARIO)
+      references USUARIOS (ID_USUARIO)
       on delete restrict on update restrict;
 
 alter table INSCRIPCIONES
    add constraint FK_INSCRIPC_REFERENCE_PERIODOS foreign key (ID_PERIODO)
-      references PERIODOS_ACADEMICOS (ID_PERIODO)
+      references PERIODOS_LECTIVOS (ID_PERIODO)
       on delete restrict on update restrict;
 
 alter table INSCRIPCIONES
@@ -689,40 +499,30 @@ alter table INSCRIPCIONES
       references TUTORES (ID_TUTOR)
       on delete restrict on update restrict;
 
-alter table INSCRIPCIONES_DETALLES
-   add constraint FK_INSCRIPC_REFERENCE_INSCRIPC foreign key (ID_INSCRIPCION)
-      references INSCRIPCIONES (ID_INSCRIPCION)
+alter table PAGINAS
+   add constraint FK_PAGINAS_REFERENCE_MODULOS foreign key (ID_MODULO)
+      references MODULOS (ID_MODULO)
       on delete restrict on update restrict;
 
-alter table INSTITUCIONES
-   add constraint FK_INSTITUC_REFERENCE_BARRIOS foreign key (ID_BARRIO)
-      references BARRIOS (ID_BARRIO)
+alter table PERMISOS
+   add constraint FK_PERMISOS_REFERENCE_PAGINAS foreign key (ID_PAGINA)
+      references PAGINAS (ID_PAGINA)
       on delete restrict on update restrict;
 
-alter table MATERIAS
-   add constraint FK_MATERIAS_REFERENCE_CURSOS foreign key (ID_CURSO)
-      references CURSOS (ID_CURSO)
+alter table PERMISOS
+   add constraint FK_PERMISOS_REFERENCE_USUARIOS foreign key (ID_GRUPO)
+      references USUARIOS_GRUPOS (ID_GRUPO)
       on delete restrict on update restrict;
 
-alter table RECURSOSXCONTENIDO
-   add constraint FK_RECURSOS_REFERENCE_RECURSOS foreign key (ID_RECURSO)
-      references RECURSOS (ID_RECURSO)
-      on delete restrict on update restrict;
+alter table TURNOS_ESCUELAS
+   add constraint FK_TURNOS_E_REFERENCE_ESCUELAS foreign key (ID_ESCUELA)
+      references ESCUELAS (ID_ESCUELA)
+      on delete cascade on update restrict;
 
-alter table RECURSOSXCONTENIDO
-   add constraint FK_RECURSOS_REFERENCE_CONTENID foreign key (ID_CONTENIDO)
-      references CONTENIDOS (ID_CONTENIDO)
-      on delete restrict on update restrict;
-
-alter table REQUISITOS_DETALLES
-   add constraint FK_REQUISIT_REFERENCE_REQUISIT foreign key (ID_REQUISITO)
-      references REQUISITO_INSCRIPCION (ID_REQUISITO)
-      on delete restrict on update restrict;
-
-alter table REQUISITO_INSCRIPCION
-   add constraint FK_REQUISIT_REFERENCE_PERIODOS foreign key (ID_PERIODO)
-      references PERIODOS_ACADEMICOS (ID_PERIODO)
-      on delete restrict on update restrict;
+alter table TURNOS_ESCUELAS
+   add constraint FK_TURNOS_E_REFERENCE_TURNOS foreign key (ID_TURNO)
+      references TURNOS (ID_TURNO)
+      on delete cascade on update restrict;
 
 alter table TUTORESALUMNOS
    add constraint FK_TUTORESA_REFERENCE_PARENTES foreign key (ID_PARENTEZCO)
@@ -737,5 +537,20 @@ alter table TUTORESALUMNOS
 alter table TUTORESALUMNOS
    add constraint FK_TUTORESA_REFERENCE_TUTORES foreign key (ID_TUTOR)
       references TUTORES (ID_TUTOR)
+      on delete restrict on update restrict;
+
+alter table USUARIOS
+   add constraint FK_USUARIOS_REFERENCE_USUARIOS foreign key (ID_GRUPO)
+      references USUARIOS_GRUPOS (ID_GRUPO)
+      on delete restrict on update restrict;
+
+alter table USUARIOS
+   add constraint FK_USUARIOS_REFERENCE_FUNCIONA foreign key (ID_empleado)
+      references FUNCIONARIOS (ID_empleado)
+      on delete restrict on update restrict;
+
+alter table USUARIOS
+   add constraint FK_USUARIOS_REFERENCE_ESCUELAS foreign key (ID_INSTITUCION)
+      references ESCUELAS (ID_ESCUELA)
       on delete restrict on update restrict;
 

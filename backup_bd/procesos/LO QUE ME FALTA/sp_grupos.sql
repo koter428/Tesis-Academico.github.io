@@ -5,16 +5,16 @@
 CREATE OR REPLACE FUNCTION sp_grupos(
     ban integer,
     vgru_cod integer DEFAULT 0,
-    vgru_nombre character varying DEFAULT ''::character varying)
+    vnombre_grupo character varying DEFAULT ''::character varying)
   RETURNS character varying AS
 $BODY$ declare mensaje varchar default null;
 begin
            if ban = 1 then --insertar
-                   insert into grupos(gru_cod,gru_nombre)
-                   values(calcular_ultimo('grupos','gru_cod'),trim(upper(vgru_nombre)));
+                   insert into grupos(gru_cod,nombre_grupo)
+                   values(calcular_ultimo('grupos','gru_cod'),trim(upper(vnombre_grupo)));
                    mensaje = 'Se guardó correctamente el grupos*grupos_index';
           elsif ban = 2 then
-                   update grupos set gru_nombre = trim(upper(vgru_nombre))
+                   update grupos set nombre_grupo = trim(upper(vnombre_grupo))
                    where gru_cod = vgru_cod;
                    mensaje = 'Se modifico correctamente el grupos*grupos_index';
           elsif ban = 3 then

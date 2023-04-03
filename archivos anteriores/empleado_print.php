@@ -55,7 +55,7 @@ $pdf->SetFont('times', 'B', 18);
 
 // AGREGAR PAGINA
 $pdf->AddPage('P', 'LEGAL');
-$pdf->Cell(0, 0, "REPORTE DE EMPLEADO", 0, 1, 'C');
+$pdf->Cell(0, 0, "REPORTE DE empleado", 0, 1, 'C');
 //SALTO DE LINEA
 $pdf->Ln();
 //COLOR DE TABLA
@@ -77,14 +77,14 @@ $pdf->Ln();
 $pdf->SetFont('', '');
 $pdf->SetFillColor(255, 255, 255);
 //CONSULTAS DE LOS REGISTROS
-$empleado = consultas::get_datos("select * from empleado order by emp_cod");
+$empleado = consultas::get_datos("select * from empleado order by id_empleado");
 
 if (!empty($empleado)) {
     foreach ($empleado as $emple) {
-        $pdf->Cell(10, 5, $emple['emp_cod'], 1, 0, 'O', 1);
+        $pdf->Cell(10, 5, $emple['id_empleado'], 1, 0, 'O', 1);
         $pdf->Cell(25, 5, $emple['car_cod'], 1, 0, 'C', 1);
-        $pdf->Cell(35, 5, $emple['emp_nombre'], 1, 0, 'L', 1);
-        $pdf->Cell(35, 5, $emple['emp_apellido'], 1, 0, 'C', 1);
+        $pdf->Cell(35, 5, $emple['nombre_empleado'], 1, 0, 'L', 1);
+        $pdf->Cell(35, 5, $emple['nombre_empleado'], 1, 0, 'C', 1);
         $pdf->Cell(30, 5, $emple['emp_direcc'], 1, 0, 'C', 1);
         $pdf->Cell(30, 5, $emple['emp_tel'], 1, 0, 'C', 1);
         $pdf->Ln();

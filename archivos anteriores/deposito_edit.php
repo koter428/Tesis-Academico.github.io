@@ -56,7 +56,7 @@
                                                                 $sql = "select * from sucursal order by id_sucursal = " . $deposito[0]["id_sucursal"];
                                                                 $sucursal = consultas::get_datos($sql);
                                                             ?>
-                                                            <select class="form-control select2" name="vid_sucursal" required="">
+                                                            <select class="form-control select2" name="id_institucion" required="">
                                                                 <option value="">Seleccione una Sucursal</option>
                                                                 <?php foreach ($sucursal as $sucur) { ?>
                                                                 <option value="<?php echo $sucur['id_sucursal'];?>" selected><?php echo $sucur['id_sucursal'];?></option>   

@@ -29,12 +29,12 @@
                             </div>
                             <?php } ?> 
                             <div class="box box-primary">
-                            <?php if ($_SESSION['EMPLEADOS']['leer']==='t') { ?>
+                            <?php if ($_SESSION['empleado']['leer']==='t') { ?>
                                 <div class="box-header">
                                     <i class="ion ion-android-person"></i>
-                                    <h3 class="box-title">Empleados</h3>
+                                    <h3 class="box-title">empleado</h3>
                                     <div class="box-tools">
-                                    <?php if ($_SESSION['EMPLEADOS']['insertar']==='t') { ?> 
+                                    <?php if ($_SESSION['empleado']['insertar']==='t') { ?> 
                                         <a href="empleado_add.php" class="btn btn-primary btn-sm" data-title="Agregar" rel="tooltip">
                                             <i class="fa fa-plus"></i>
                                             <?php } ?> 
@@ -63,8 +63,8 @@
                                                 </div>
                                             </form>
                                             <?php
-                                                // $sql = "select * from empleado where emp_nombre ilike '%". (isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by emp_apellido";
-                                                $sql = "select * from empleado, cargo where empleado.car_cod = cargo.car_cod and (empleado.emp_nombre || ', ' || empleado.emp_apellido) ilike '%". (isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by empleado.emp_apellido";
+                                                // $sql = "select * from empleado where nombre_empleado ilike '%". (isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by nombre_empleado";
+                                                $sql = "select * from empleado, cargo where empleado.car_cod = cargo.car_cod and (empleado.nombre_empleado || ', ' || empleado.nombre_empleado) ilike '%". (isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by empleado.nombre_empleado";
                                                 // echo $sql; return;
                                                 $empleado = consultas::get_datos($sql);
                                                 if (!empty($empleado)) { ?>
@@ -83,19 +83,19 @@
                                                     <tbody>
                                                      <?php foreach ($empleado as $emp){ ?>
                                                         <tr>
-                                                            <td data-title="Nombres y Apellidos"><?php echo $emp['emp_nombre'].", " .$emp['emp_apellido'];?></td>
+                                                            <td data-title="Nombres y Apellidos"><?php echo $emp['nombre_empleado'].", " .$emp['nombre_empleado'];?></td>
                                                             <td data-title="Cargo"><?php echo $emp['car_descri'];?></td>
                                                             <td data-title="Telefono"><?php echo $emp['emp_tel'];?></td> 
                                                             <td data-title="Dirección"><?php echo $emp['emp_direcc'];?></td>
-                                                            <td data-title="Código"><?php echo $emp['emp_cod'];?></td>
+                                                            <td data-title="Código"><?php echo $emp['id_empleado'];?></td>
                                                             <td data-title="Acciones" class="text-center">
-                                                             <?php if ($_SESSION['EMPLEADOS']['editar']=='t') { ?>
-                                                                 <a href="empleado_edit.php?vemp_cod=<?php echo $emp['emp_cod'];?>" class="btn btn-warning btn-sm" role="button"
+                                                             <?php if ($_SESSION['empleado']['editar']=='t') { ?>
+                                                                 <a href="empleado_edit.php?vid_empleado=<?php echo $emp['id_empleado'];?>" class="btn btn-warning btn-sm" role="button"
                                                                     data-title="Editar" >
                                                                  <i class="fa fa-edit"></i>
                                                                  </a>  <?php }?> 
-                                                                 <?php if ($_SESSION['EMPLEADOS']['borrar']=='t') { ?>
-                                                                    <a onclick="borrar(<?php echo "'".$emp['emp_cod']."_".$emp['emp_nombre']."'";?>)" class="btn btn-danger btn-sm" role='button'
+                                                                 <?php if ($_SESSION['empleado']['borrar']=='t') { ?>
+                                                                    <a onclick="borrar(<?php echo "'".$emp['id_empleado']."_".$emp['nombre_empleado']."'";?>)" class="btn btn-danger btn-sm" role='button'
                                                                         data-title='Borrar' rel='tooltip' data-placement='top' data-toggle="modal" data-target="#borrar">
                                                                         <span class="glyphicon glyphicon-trash"></span></a>     
                                                                  </a><?php }?> 
@@ -109,7 +109,7 @@
                                           <?php }else{ ?>
                                             <div class="alert alert-info">
                                                 <span class="glyphicon glyphicon-info-sign"></span>
-                                                  No se han Registrado aún Empleados...
+                                                  No se han Registrado aún empleado...
                                             </div>
                                            <?php } ?>
                                             </div>
@@ -165,7 +165,7 @@
         <script>
         function borrar(datos){
             var dat = datos.split("_");
-            $('#si').attr('href','empleado_control.php?vemp_cod='+dat[0]+'&vcar_descri='+dat[1]+'&accion=3');
+            $('#si').attr('href','empleado_control.php?vid_empleado='+dat[0]+'&vcar_descri='+dat[1]+'&accion=3');
             $('#confirmacion').html('<span class="glyphicon glyphicon-warning-sign"></span> \n\
             Desea borrrar al empleado <strong>'+dat[1]+'</strong>?');
         }        

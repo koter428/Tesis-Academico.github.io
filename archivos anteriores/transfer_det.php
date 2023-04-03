@@ -54,7 +54,7 @@
                                                         <tr>
                                                             <th>N° Transferencia</th>
                                                             <th>Fecha</th>
-                                                            <th>Empleado</th>
+                                                            <th>empleado</th>
                                                             <th>Monto Ajustado</th>
                                                         </tr>
                                                     </thead>
@@ -63,7 +63,7 @@
                                                         <tr>
                                                             <td data-title='N° Transf.'><?php echo $tra['tra_cod'];?></td>
                                                             <td data-title='Fecha'><?php echo $tra['tra_fecha'];?></td>
-                                                            <td data-title='Empleado'><?php echo $tra['empleado'];?></td>
+                                                            <td data-title='empleado'><?php echo $tra['empleado'];?></td>
                                                             <td data-title='Total'><?php echo number_format($tra['tra_total'],0,",",".");?></td>
                                                         </tr>
                                                         <?php } ?>
@@ -94,7 +94,7 @@
                                                 full outer join deposito as destino on transferencias_detalle.dep_des = destino.dep_cod
                                                 full outer join articulo on transferencias_detalle.art_cod = articulo.art_cod,
                                                 empleado
-                                                where transferencias.emp_cod = empleado.emp_cod
+                                                where transferencias.id_empleado = empleado.id_empleado
                                                 and dep_ori is not null
                                                 and transferencias.tra_cod = " . $tra['tra_cod'];
                                         // echo $sql; return;
@@ -164,7 +164,7 @@
                                                 full outer join deposito as destino on transferencias_detalle.dep_des = destino.dep_cod
                                                 full outer join articulo on transferencias_detalle.art_cod = articulo.art_cod,
                                                 empleado
-                                                where transferencias.emp_cod = empleado.emp_cod
+                                                where transferencias.id_empleado = empleado.id_empleado
                                                 and transferencias.tra_cod = " . $transferencias[0]['tra_cod'];
                                                 $detalles = consultas::get_datos($sql);
                                                 if (!empty($detalles)) { ?>

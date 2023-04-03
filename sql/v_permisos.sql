@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW public.v_permisos
+CREATE OR REPLACE VIEW public.vista_permisos
  AS
 SELECT a.id_pagina,
     b.direccion,
@@ -16,5 +16,5 @@ SELECT a.id_pagina,
      JOIN modulos c ON c.id_modulo = b.id_modulo
      JOIN usuarios_grupos d ON d.id_grupo = a.id_grupo;
 	 
-ALTER TABLE public.v_permisos
+ALTER TABLE public.vista_permisos
 OWNER TO postgres;

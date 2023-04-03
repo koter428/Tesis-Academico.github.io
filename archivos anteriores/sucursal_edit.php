@@ -34,10 +34,10 @@
                                 </div> 
                                 <form action="sucursal_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                     <div class="box-body">
-                                        <?php $resultado = consultas::get_datos("select * from sucursal where id_sucursal=".$_GET['vid_sucursal']);?>
+                                        <?php $resultado = consultas::get_datos("select * from sucursal where id_sucursal=".$_GET['id_institucion']);?>
                                         <div class="form-group">
                                             <input type="hidden" name="accion" value="2"/>
-                                            <input type="hidden" name="vid_sucursal" value="<?php echo $resultado[0]['id_sucursal']?>"/>
+                                            <input type="hidden" name="id_institucion" value="<?php echo $resultado[0]['id_sucursal']?>"/>
                                             <label class="control-label col-lg-2 col-md-2 col-sm-2"> Descripción:</label>
                                             <div class="col-lg-8 col-md-8 col-sm-8">
                                                 <input type="text" name="vsuc_descri" class="form-control" required="" autofocus="" 

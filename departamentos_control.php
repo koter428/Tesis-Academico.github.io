@@ -8,11 +8,12 @@ require 'funciones/lib_funciones.php';
 $accion = $_REQUEST['accion'];
 
 if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){
-    $sql = "select sp_sucursal(" . $accion . "," . (!empty($_REQUEST['id_institucion']) ? $_REQUEST['id_institucion'] : 0) . ",'" .
-    (!empty($_REQUEST['vsuc_descri']) ? $_REQUEST['vsuc_descri'] : "") . "') as resul";
-}
+    $sql = "select sp_departamentos(" . $accion . "," . 
+    (!empty($_REQUEST['id_dpto']) ? $_REQUEST['id_dpto'] : 0) . ",'" .
+    (!empty($_REQUEST['nombre']) ? $_REQUEST['nombre'] : "") . "') as resul";
+}  
 else if (strcmp($accion,"3") == 0){
-    $sql = "select sp_sucursal(" . $accion . "," . $_REQUEST['id_institucion']. ",'') as resul";
+    $sql = "select sp_dpto(" . $accion . "," . $_REQUEST['id_dpto'] . ") as resul";
 }
 //echo $sql; return;
 
@@ -24,5 +25,5 @@ if (isset($mensaje)) {
     header("location:" . $mensaje[1] . ".php");
 } else {
     $_SESSION['mensaje'] = "Error al procesar " . pg_last_error();
-    header("location:" . "sucursal_index.php");
+    header("location:" . "departamentos_index.php");
 }

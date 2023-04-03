@@ -30,7 +30,7 @@ and open the template in the editor.
                             <div class="box box-danger">
                                 <div class="box-header">
                                     <i class="fa fa-trash"></i>
-                                    <h3 class="box-title">Borrar Empleado</h3>
+                                    <h3 class="box-title">Borrar empleado</h3>
                                     <div class="box-tools">
                                         <a href="empleado_index.php" class="btn btn-primary btn-sm" data-title="Volver" >
                                             <i class="fa fa-arrow-left"></i>
@@ -39,10 +39,10 @@ and open the template in the editor.
                                 </div> 
                                 <form action="empleado_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                     <div class="box-body">
-                                        <?php $resultado = consultas::get_datos("select * from empleado where emp_cod=".$_GET['vemp_cod']);?>
+                                        <?php $resultado = consultas::get_datos("select * from empleado where id_empleado=".$_GET['vid_empleado']);?>
                                         <div class="form-group">
                                             <input type="hidden" name="accion" value="3"/>
-                                            <input type="hidden" name="vemp_cod" value="<?php echo $resultado[0]['emp_cod']?>"/>
+                                            <input type="hidden" name="vid_empleado" value="<?php echo $resultado[0]['id_empleado']?>"/>
                                             <label class="control-label col-lg-2 col-md-2 col-sm-2">Cargo:</label>
                                             <div class="col-lg-8 col-md-8 col-sm-8">
                                                 <input type="text" name="vcar_cod" class="form-control" disabled="" 
@@ -52,15 +52,15 @@ and open the template in the editor.
                                         <div class="form-group">  
                                             <label class="control-label col-lg-2 col-md-2 col-sm-2">Nombres:</label>
                                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                                <input type="text" name="vemp_nombre" class="form-control" disabled="" 
-                                                       value="<?php echo $resultado[0]['emp_nombre']?>"/>
+                                                <input type="text" name="vnombre_empleado" class="form-control" disabled="" 
+                                                       value="<?php echo $resultado[0]['nombre_empleado']?>"/>
                                             </div>
                                         </div>
                                         <div class="form-group">  
                                             <label class="control-label col-lg-2 col-md-2 col-sm-2">Apellido:</label>
                                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                                <input type="text" name="vemp_apellido" class="form-control" disabled="" 
-                                                       value="<?php echo $resultado[0]['emp_apellido']?>"/>
+                                                <input type="text" name="vnombre_empleado" class="form-control" disabled="" 
+                                                       value="<?php echo $resultado[0]['nombre_empleado']?>"/>
                                             </div>
                                         </div>
                                         <div class="form-group">  

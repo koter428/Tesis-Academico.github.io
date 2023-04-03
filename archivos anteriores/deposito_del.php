@@ -46,7 +46,7 @@
                                     <div class="box-body">
                                             <label class="control-label col-lg-2 col-md-2 col-sm-2"> Depositos:</label>
                                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                                <input type="text" name="vid_sucursal" class="form-control" required="" disabled=""
+                                                <input type="text" name="id_institucion" class="form-control" required="" disabled=""
                                                        value="<?php echo $resultado[0]['id_sucursal']?>"/>
                                             </div>
                                     </div>

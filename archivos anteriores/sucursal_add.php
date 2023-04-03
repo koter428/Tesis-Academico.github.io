@@ -36,7 +36,7 @@
                                     <div class="box-body">
                                         <div class="form-group">
                                             <input type="hidden" name="accion" value="1"/>
-                                            <input type="hidden" name="vid_sucursal" value="0"/>                                            
+                                            <input type="hidden" name="id_institucion" value="0"/>                                            
                                             <label class="control-label col-lg-2 col-md-2 col-sm-2"> Descripción:</label>
                                             <div class="col-lg-8 col-md-8 col-sm-8">
                                                 <input type="text" name="vsuc_descri" class="form-control" required="" autofocus=""/>

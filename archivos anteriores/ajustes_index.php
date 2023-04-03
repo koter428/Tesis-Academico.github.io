@@ -66,7 +66,7 @@
                                             //consulta a la tabla ajustes
                                             //print_r($_SESSION); return;
                                             $sql = "select to_char(aju_fecha,'dd-mm-yyyy') as aju_fecha, 
-                                                    empleado.emp_nombre || ' ' || empleado.emp_apellido as empleado, 
+                                                    empleado.nombre_empleado || ' ' || empleado.nombre_empleado as empleado, 
                                                     deposito.dep_descri,
                                                     articulo.art_descri,
                                                     coalesce(ajustes_detalle.aju_cant,0) as aju_cant,
@@ -78,7 +78,7 @@
                                                     full outer join articulo on ajustes_detalle.art_cod = articulo.art_cod
                                                     full outer join ajustes_motivos on ajustes_detalle.mot_cod = ajustes_motivos.mot_cod,
                                                     empleado
-                                                    where ajustes.emp_cod = empleado.emp_cod
+                                                    where ajustes.id_empleado = empleado.id_empleado
                                                     and coalesce(articulo.art_descri::varchar,'') ilike '%". (isset($_REQUEST['buscar'])?$_REQUEST['buscar']:""). "%' order by aju_fecha, art_descri ";
                                             //echo $sql; return;
                                             $ajustes = consultas::get_datos($sql);
@@ -88,7 +88,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Fecha Ajuste</th>
-                                                            <th>Empleado</th>
+                                                            <th>empleado</th>
                                                             <th>Depósito</th>
                                                             <th>Artículo</th>
                                                             <th>Cantidad</th>
@@ -102,7 +102,7 @@
                                                         <?php foreach ($ajustes as $aju) { ?>
                                                         <tr>
                                                             <td data-title='Fecha Ajuste'><?php echo $aju['aju_fecha'];?></td>
-                                                            <td data-title='Empleado'><?php echo $aju['empleado'];?></td>
+                                                            <td data-title='empleado'><?php echo $aju['empleado'];?></td>
                                                             <td data-title='Depósito'><?php echo $aju['dep_descri'];?></td>
                                                             <td data-title='Artículo'><?php echo $aju['art_descri'];?></td>
                                                             <td data-title='Cantidad'><?php echo number_format($aju['aju_cant'],2,",",".");?></td>

@@ -9,15 +9,15 @@
 
     if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){
         $sql = "select sp_empleado(" . $accion . "," . 
-        (!empty($_REQUEST['vemp_cod']) ? $_REQUEST['vemp_cod'] : 0) . "," .
+        (!empty($_REQUEST['vid_empleado']) ? $_REQUEST['vid_empleado'] : 0) . "," .
         (!empty($_REQUEST['vcar_cod']) ? $_REQUEST['vcar_cod'] : 0) . ",'" .
-        (!empty($_REQUEST['vemp_nombre']) ? $_REQUEST['vemp_nombre'] : '') . "','" .
-        (!empty($_REQUEST['vemp_apellido']) ? $_REQUEST['vemp_apellido'] : '') . "','" .
+        (!empty($_REQUEST['vnombre_empleado']) ? $_REQUEST['vnombre_empleado'] : '') . "','" .
+        (!empty($_REQUEST['vnombre_empleado']) ? $_REQUEST['vnombre_empleado'] : '') . "','" .
         (!empty($_REQUEST['vemp_direcc']) ? $_REQUEST['vemp_direcc'] : 0) . "','" .
         (!empty($_REQUEST['vemp_tel']) ? $_REQUEST['vemp_tel'] : '') . "') as resul";
     }
     else if (strcmp($accion,"3") == 0){
-        $sql = "select sp_empleado(" . $accion . "," . $_REQUEST['vemp_cod'] . ") as resul";
+        $sql = "select sp_empleado(" . $accion . "," . $_REQUEST['vid_empleado'] . ") as resul";
     }
     // echo $sql; return;
     $mensaje = consultas::get_datos($sql);

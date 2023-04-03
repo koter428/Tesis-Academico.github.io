@@ -5,18 +5,18 @@
 CREATE OR REPLACE FUNCTION sp_pedventas(
     ban integer,
     vped_cod integer DEFAULT 0,
-    vemp_cod integer DEFAULT 0,
+    vid_empleado integer DEFAULT 0,
     vcli_cod integer DEFAULT 0,
-    vid_sucursal integer DEFAULT 0)
+    id_institucion integer DEFAULT 0)
   RETURNS character varying AS
 $BODY$
 declare mensaje varchar default null;
 begin
 	if ban = 1 then --insertar
-		INSERT INTO pedido_cabventa(ped_cod, ped_fecha, emp_cod, cli_cod, estado, 
+		INSERT INTO pedido_cabventa(ped_cod, ped_fecha, id_empleado, cli_cod, estado, 
 		id_sucursal)
 		    VALUES (calcular_ultimo('pedido_cabventa','ped_cod'), current_date,
-		    vemp_cod, vcli_cod, 'P', vid_sucursal);
+		    vid_empleado, vcli_cod, 'P', id_institucion);
 		    mensaje = 'Se insertó correctamente el pedido de venta';	
 	elsif ban = 2 then --modificar
 		update pedido_cabventa set cli_cod = vcli_cod

@@ -1,8 +1,26 @@
 -- Inserts de Accesos
-delete from empleados;
 delete from permisos;
+delete from usuarios;
+delete from usuarios_grupos;
+delete from funcionarios;
+delete from cargos;
 delete from paginas;
 delete from modulos;
+
+insert into cargos
+values(1,'Administración del Sistema');
+
+-- funcionarios
+insert into funcionarios
+values
+(1,'Administrador','Sistema','0','C','2021-08-04','Ninguna',1,1,'0','admin@admin.com','M','A',current_timestamp);
+
+insert into usuarios_grupos
+values(1,'Grupo Administrador');
+
+insert into usuarios
+values
+(1,'root',md5('root123'),1,1,1);
 
 -- modulos
 insert into modulos
@@ -18,31 +36,32 @@ values
 insert into paginas
 (id_pagina, direccion, nombre, id_modulo)
 values
-(1,'paginas.php','PAGINAS',1),
-(2,'grupos.php','GRUPOS',1),
-(3,'usuarios.php','USUARIOS',1),
-(4,'tipos_educacion.php','TIPOS DE EDUCACION',2),
-(5,'periodos_lectivos.php','PERIODOS LECTIVOS',2),
-(6,'turnos.php','TURNOS',2),
-(7,'escuela.php','ESCUELA',2),
-(8,'cargos.php','CARGOS',3),
-(9,'funcionarios.php','FUNCIONARIOS',3),
-(10,'alumnos.php','ALUMNOS',3),
-(11,'tutores.php','TUTORES',3),
-(12,'parentesco.php','PARENTESCO',3),
-(13,'departamentos.php','DEPARTAMENTOS',3),
-(14,'ciudades.php','CIUDADES',3),
-(15,'barrios.php','BARRIOS',3),
-(16,'inscripciones_alumnos.php','INSCRIPCIONES DE ALUMNOS',4),
-(17,'usuarios.php','USUARIOS',5),
-(18,'turnos.php','TURNOS',5),
-(19,'alumnos.php','ALUMNOS',5),
-(20,'funcionarios.php','FUNCIONARIOS',5),
-(21,'inscripciones.php','INSCRIPCIONES',5);
+(1,'paginas_index.php','PAGINAS',1),
+(2,'grupos_index.php','GRUPOS',1),
+(3,'usuarios_index.php','USUARIOS',1),
+(4,'tipos_educacion_index.php','TIPOS DE EDUCACION',2),
+(5,'periodos_lectivos_index.php','PERIODOS LECTIVOS',2),
+(6,'turnos_index.php','TURNOS',2),
+(7,'escuelas_index.php','ESCUELA',2),
+(8,'cargos_index.php','CARGOS',3),
+(9,'funcionarios_index.php','FUNCIONARIOS',3),
+(10,'alumnos_index.php','ALUMNOS',3),
+(11,'tutores_index.php','TUTORES',3),
+(12,'parentescos_index.php','PARENTESCO',3),
+(13,'departamentos_index.php','DEPARTAMENTOS',3),
+(14,'ciudades_index.php','CIUDADES',3),
+(15,'barrios_index.php','BARRIOS',3),
+(16,'inscripciones_alumnos_index.php','INSCRIPCIONES DE ALUMNOS',4),
+(17,'usuarios_rpt.php','USUARIOS',5),
+(18,'turnos_rpt.php','TURNOS',5),
+(19,'alumnos_rpt.php','ALUMNOS',5),
+(20,'funcionarios_rpt.php','FUNCIONARIOS',5),
+(21,'inscripciones_rpt.php','INSCRIPCIONES',5);
 
 
 -- permisos
 insert into permisos
+(id_pagina,id_grupo,leer,insertar,editar,borrar)
 values
 (1,1,true,true,true,true),
 (2,1,true,true,true,true),
@@ -66,14 +85,9 @@ values
 (20,1,true,true,true,true),
 (21,1,true,true,true,true);
 
--- empleados
-insert into empleados
-values
-(1,'Administrador','Sistema','0','C','2021-08-04','Ninguna',1,1,'0','admin@admin.com','M','A',current_timestamp);
 
-insert into usuarios
-values
-(1,'root',md5('root123'),1,1,1);
+
+
 
 
 

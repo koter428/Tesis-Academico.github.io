@@ -75,7 +75,7 @@
                                                                 <input type="text" class="form-control" value="<?php echo $_SESSION["sucursal"];?>" readonly=""/>                                                
                                                             </div>      
                                                             <div class="col-lg-6 col-md-6 col-xs-12">
-                                                                <label>Empleado:</label>
+                                                                <label>empleado:</label>
                                                                 <input type="text" class="form-control" value="<?php echo $_SESSION["nombres"];?>" readonly=""/>                                                
                                                             </div>                                                  
                                                         </div>
@@ -108,7 +108,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">RUC°:</label>
                                             <div class="col-lg-5">
-                                                <input type="number" name="vemp_cod" class="form-control" required="" autofocus="" min="1" placeholder="Ingrese el C.I del cliente"/>
+                                                <input type="number" name="vid_empleado" class="form-control" required="" autofocus="" min="1" placeholder="Ingrese el C.I del cliente"/>
                                             </div>
                                         </div>
                                         <div class="form-group">

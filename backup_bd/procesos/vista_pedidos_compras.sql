@@ -3,8 +3,8 @@
 CREATE OR REPLACE VIEW v_pedido_cabcompra AS 
  SELECT a.ped_com,
     to_char(a.ped_fecha::timestamp with time zone, 'dd/mm/yyyy'::text) AS ped_fecha,
-    a.emp_cod,
-    (b.emp_nombre::text || ' '::text) || b.emp_apellido::text AS empleado,
+    a.id_empleado,
+    (b.nombre_empleado::text || ' '::text) || b.nombre_empleado::text AS empleado,
     a.prv_cod,
     c.prv_ruc,
     (c.prv_razonsocial::text || ' '::text) AS proveedor,
@@ -22,7 +22,7 @@ CREATE OR REPLACE VIEW v_pedido_cabcompra AS
            FROM detalle_pedcompra
           WHERE detalle_pedcompra.ped_com = a.ped_com))::numeric) AS totalletra
    FROM pedido_cabcompra a
-     JOIN empleado b ON a.emp_cod = b.emp_cod
+     JOIN empleado b ON a.id_empleado = b.id_empleado
      JOIN proveedor c ON a.prv_cod = c.prv_cod
      JOIN sucursal d ON a.id_sucursal = d.id_sucursal;
 

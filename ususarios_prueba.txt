@@ -1,5 +1,5 @@
 INSERT INTO usuarios(
-            usu_cod, usu_nick, usu_clave, emp_cod, gru_cod, id_sucursal)
+            usu_cod, usu_nick, usu_clave, id_empleado, gru_cod, id_sucursal)
     VALUES ('1', 'escuela',md5('2001'), '1', '1', '1');
 
 select * from usuarios

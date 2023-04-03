@@ -38,8 +38,8 @@
             /*$modulos=consultas::get_datos("select distinct on(mod_nombre)* from modulos a
             join paginas b on a.mod_cod=b.mod_cod
             order by mod_nombre");*/
-           $modulos=consultas::get_datos("select distinct(id_modulo),(nombre_modulo) from v_permisos 
-			where id_grupo =".$_SESSION['id_grupo']." order by nombre_modulo");   
+           $modulos = consultas::get_datos("select distinct(id_modulo),(nombre_modulo) from vista_permisos 
+			where id_grupo =".$_SESSION['id_grupo'] . "");   
    
      foreach ($modulos as $modulo) { ?>                        
             <li class="treeview">
@@ -48,9 +48,9 @@
                 </a>
         <?php
 			//Obtener las paginas de acuerdo al modulo
-            $paginas=consultas::get_datos("select direccion,nombre_pagina,leer,insertar,editar,borrar from v_permisos  
+            $paginas=consultas::get_datos("select direccion,nombre_pagina,leer,insertar,editar,borrar from vista_permisos  
             where id_modulo=".$modulo['id_modulo']." and id_grupo =".$_SESSION['id_grupo']
-            ." order by nombre_pagina");        
+            . " ");        
         ?>    
                     <ul class="treeview-menu">
                         <?php foreach ($paginas as $pagina) { ?>

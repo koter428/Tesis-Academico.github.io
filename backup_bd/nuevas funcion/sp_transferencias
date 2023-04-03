@@ -5,10 +5,10 @@
 CREATE OR REPLACE FUNCTION public.sp_transfer(
 	ban integer,
 	vtra_cod integer DEFAULT 0,
-	vemp_cod integer DEFAULT 0,
+	vid_empleado integer DEFAULT 0,
 	vtra_total integer DEFAULT 0,
 	vtra_obser character varying DEFAULT ''::character varying,
-	vid_sucursal integer DEFAULT 0)
+	id_institucion integer DEFAULT 0)
 RETURNS character varying
     LANGUAGE 'plpgsql'
     COST 100
@@ -18,12 +18,12 @@ declare mensaje varchar default null;
 begin
 	--sentencias sql
 	if ban = 1 then --insertar
-		insert into transferencias(tra_cod,emp_cod,tra_fecha,tra_total,tra_obser,id_sucursal)
-        values(calcular_ultimo('transferencias','tra_cod'),vemp_cod,current_date,vtra_total,vtra_obser,vid_sucursal);
+		insert into transferencias(tra_cod,id_empleado,tra_fecha,tra_total,tra_obser,id_sucursal)
+        values(calcular_ultimo('transferencias','tra_cod'),vid_empleado,current_date,vtra_total,vtra_obser,id_institucion);
 		mensaje = 'Se guardó correctamente la transferencia*transfer_index';
 	elsif ban = 2 then
 		update 	transferencias
-		set 	emp_cod = vemp_cod,
+		set 	id_empleado = vid_empleado,
 				tra_obser = vtra_obser
 		where 	tra_cod = vtra_cod;
 		mensaje = 'Se actualizó correctamente la transferencia*transfer_index';

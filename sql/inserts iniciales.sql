@@ -1,10 +1,10 @@
-delete from instituciones;
+delete from escuelas;
 delete from barrios;
 delete from ciudades;
 delete from departamentos;
 
 insert into departamentos
-(id_dpto, nombre)
+(id_departamentos, nombre)
 values 
 (1,'Concepción'),
 (2,'San Pedro'),
@@ -24,7 +24,7 @@ values
 (16,'Alto Paraguay');
 
 insert into  ciudades
-(id_ciudad,nombre,id_dpto)
+(id_ciudad,nombre,id_departamentos)
 values
 (1,'Asunción',10);
 
@@ -33,7 +33,11 @@ insert into barrios
 values
 (1,1,'Barrio Tacumbú');
 
-insert into instituciones 
-(id_institucion, nombre, direccion, id_barrio, telefono, email, correo, tipo)
-values(1,'Escuela Divino Jesús','Ayolas & Teniente Gregorio Benitez',1,'(021) 372 912','divijesus@email.com','NN','P');
+insert into escuelas
+(id_escuela, nombre, direccion, id_barrio, telefono, 
+ email, correo, escuela, colegio, fecha_inauguracion, 
+ activo)
+values(1,'Escuela Divino Jesús','Ayolas & Teniente Gregorio Benitez', 1,'(021) 372 912',
+	   'divijesus@email.com','NN','S','S','1965-03-21',
+	  'S');
 

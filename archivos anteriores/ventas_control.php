@@ -7,7 +7,7 @@
         
     $sql="select sp_ventas(".$_REQUEST['accion'].",
     ".$_REQUEST['vven_cod'].", 
-    ".$_SESSION['emp_cod'].", 
+    ".$_SESSION['id_empleado'].", 
     ".(!empty($_REQUEST['vcli_cod'])?$_REQUEST['vcli_cod']:"0").", 
     ".(!empty($_REQUEST['vtipo_venta'])? "'".$_REQUEST['vtipo_venta']."'":"null").", 
     ".(!empty($_REQUEST['vcan_cuota'])?$_REQUEST['vcan_cuota']:"0").", 

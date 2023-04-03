@@ -66,7 +66,7 @@
                                             //consulta a la tabla transfer
                                             //print_r($_SESSION); return;
                                             $sql = "select to_char(tra_fecha,'dd-mm-yyyy') as tra_fecha, 
-                                                    empleado.emp_nombre || ' ' || empleado.emp_apellido as empleado, 
+                                                    empleado.nombre_empleado || ' ' || empleado.nombre_empleado as empleado, 
                                                     origen.dep_descri as dep_ori,
                                                     destino.dep_descri as dep_des,
                                                     articulo.art_descri,
@@ -77,7 +77,7 @@
                                                     full outer join deposito as destino on transferencias_detalle.dep_des = destino.dep_cod
                                                     full outer join articulo on transferencias_detalle.art_cod = articulo.art_cod,
                                                     empleado
-                                                    where transferencias.emp_cod = empleado.emp_cod
+                                                    where transferencias.id_empleado = empleado.id_empleado
                                                     and coalesce(articulo.art_descri::varchar,'') ilike '%". (isset($_REQUEST['buscar'])?$_REQUEST['buscar']:""). "%' order by tra_fecha, art_descri ";
                                             // echo $sql; return;
                                             $transfer = consultas::get_datos($sql);
@@ -87,7 +87,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Fecha Transfer.</th>
-                                                            <th>Empleado</th>
+                                                            <th>empleado</th>
                                                             <th>Origen</th>
                                                             <th>Destino</th>
                                                             <th>Artículo</th>
@@ -100,7 +100,7 @@
                                                         <?php foreach ($transfer as $tra) { ?>
                                                         <tr>
                                                             <td data-title='Fecha transfer'><?php echo $tra['tra_fecha'];?></td>
-                                                            <td data-title='Empleado'><?php echo $tra['empleado'];?></td>
+                                                            <td data-title='empleado'><?php echo $tra['empleado'];?></td>
                                                             <td data-title='Origen'><?php echo $tra['dep_ori'];?></td>
                                                             <td data-title='Destino'><?php echo $tra['dep_des'];?></td>
                                                             <td data-title='Artículo'><?php echo $tra['art_descri'];?></td>

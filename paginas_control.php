@@ -9,13 +9,13 @@ $accion = $_REQUEST['accion'];
 
 if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){ 
     $sql = "select sp_paginas(" . $accion . "," . 
-    (!empty($_REQUEST['vpag_cod']) ? $_REQUEST['vpag_cod'] : 0) . ",'" .
-    (!empty($_REQUEST['vpag_direc']) ? strtolower($_REQUEST['vpag_direc']) : 0) . "','" .
-    (!empty($_REQUEST['vpag_nombre']) ? strtoupper($_REQUEST['vpag_nombre']) : '') . "','" .
-    (!empty($_REQUEST['vmod_cod']) ? $_REQUEST['vmod_cod'] : 0) . "') as resul";
+    (!empty($_REQUEST['d_pagina']) ? $_REQUEST['id_pagina'] : 0) . ",'" .
+    (!empty($_REQUEST['direccion']) ? strtolower($_REQUEST['direccion']) : 0) . "','" .
+    (!empty($_REQUEST['nombre']) ? strtoupper($_REQUEST['nombre']) : '') . "','" .
+    (!empty($_REQUEST['id_modulo']) ? $_REQUEST['id_modulo'] : 0) . "') as resul";
 }
 else if (strcmp($accion,"3") == 0){
-    $sql = "select sp_paginas(" . $accion . "," . $_REQUEST['vpag_cod'].  ") as resul";
+    $sql = "select sp_paginas(" . $accion . "," . $_REQUEST['d_pagina'].  ") as resul";
 }
 
 // echo $sql;return;

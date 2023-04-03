@@ -14,7 +14,7 @@
                 (!empty($_REQUEST['clave']) ? $_REQUEST['vusu_clave'] : 0) . "'," .
                 (!empty($_REQUEST['id_empleado']) ? strtoupper($_REQUEST['id_empleado']) : "") . "," .
                 (!empty($_REQUEST['id_grupo']) ? $_REQUEST['id_grupo'] : 0) . "," .
-                (!empty($_REQUEST['id_institucion']) ?$_REQUEST['id_institucion'] : 1). ") as resul";
+                (!empty($_REQUEST['id_escuela']) ?$_REQUEST['id_escuela'] : 1). ") as resul";
     }
     else if (strcmp($accion,"3") == 0){
         $sql = "select sp_usuarios(" . $accion . "," . $_REQUEST['id_usuario']. ") as resul";

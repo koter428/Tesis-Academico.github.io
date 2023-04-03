@@ -63,7 +63,7 @@
                                                                     <div class="col-lg-6 col-md-5 col-sm-5">                                                                    
                                                                             <select class="form-control select2" name="vdesde" required="">
                                                                                 <?php foreach ($deposito as $dep) { ?>
-                                                                                  <option value="<?php echo ($opcion==1)?$dep['gru_cod']:$dep['gru_nombre'];?>"><?php echo ($opcion==1)?$dep['gru_cod']:$dep['gru_nombre'];?></option>   
+                                                                                  <option value="<?php echo ($opcion==1)?$dep['gru_cod']:$dep['nombre_grupo'];?>"><?php echo ($opcion==1)?$dep['gru_cod']:$dep['nombre_grupo'];?></option>   
                                                                                 <?php }?>
                                                                             </select>  
                                                                     </div>
@@ -73,7 +73,7 @@
                                                                     <div class="col-lg-6 col-md-5 col-sm-5">                                                                    
                                                                             <select class="form-control select2" name="vhasta" required="">
                                                                                 <?php foreach ($deposito as $dep) { ?>
-                                                                                  <option value="<?php echo ($opcion==1)?$dep['gru_cod']:$dep['gru_nombre'];?>"><?php echo ($opcion==1)?$dep['gru_cod']:$dep['gru_nombre'];?></option>   
+                                                                                  <option value="<?php echo ($opcion==1)?$dep['gru_cod']:$dep['nombre_grupo'];?>"><?php echo ($opcion==1)?$dep['gru_cod']:$dep['nombre_grupo'];?></option>   
                                                                                 <?php }?>
                                                                             </select>  
                                                                     </div>

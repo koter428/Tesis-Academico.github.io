@@ -4,10 +4,10 @@
 
 CREATE OR REPLACE FUNCTION sp_empleado(
     ban integer,
-    vemp_cod integer DEFAULT 0,
+    vid_empleado integer DEFAULT 0,
     vcar_cod integer DEFAULT 0,
-    vemp_nombre character varying DEFAULT ''::character varying,
-    vemp_apellido character varying DEFAULT ''::character varying,
+    vnombre_empleado character varying DEFAULT ''::character varying,
+    vnombre_empleado character varying DEFAULT ''::character varying,
     vemp_direcc character varying DEFAULT ''::character varying,
     vemp_tel character varying DEFAULT ''::character varying)
   RETURNS character varying AS
@@ -15,25 +15,25 @@ $BODY$
 declare mensaje varchar default null;
 begin
 	if ban = 1 then
-		INSERT INTO empleado(emp_cod, car_cod, emp_nombre, emp_apellido, emp_direcc, emp_tel)
-		VALUES (calcular_ultimo('empleado','emp_cod'),
+		INSERT INTO empleado(id_empleado, car_cod, nombre_empleado, nombre_empleado, emp_direcc, emp_tel)
+		VALUES (calcular_ultimo('empleado','id_empleado'),
 		vcar_cod,
-		trim(upper(vemp_apellido)), 
-		trim(upper(vemp_nombre)), 
+		trim(upper(vnombre_empleado)), 
+		trim(upper(vnombre_empleado)), 
 		vemp_direcc, 
 		vemp_tel);	
 		mensaje = 'Se guardó correctamente el empleado*empleado_index';	
 	elsif ban = 2 then
 		update empleado 
 		set car_cod = vcar_cod, 
-		emp_nombre = trim(upper(vemp_nombre)),
-		emp_apellido = trim(upper(vemp_apellido)), 
+		nombre_empleado = trim(upper(vnombre_empleado)),
+		nombre_empleado = trim(upper(vnombre_empleado)), 
 		emp_direcc = vemp_direcc, 
 		emp_tel = vemp_tel
-		where emp_cod = vemp_cod;
+		where id_empleado = vid_empleado;
 		mensaje = 'Se modificó correctamente el empleado*empleado_index';
 	elsif ban = 3 then
-		delete from empleado where emp_cod = vemp_cod;
+		delete from empleado where id_empleado = vid_empleado;
 		mensaje = 'Se eliminó correctamente el empleado*empleado_index';
 	end if;
 	return mensaje;

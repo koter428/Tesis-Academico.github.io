@@ -24,7 +24,7 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Antonio Portillo');
-$pdf->SetTitle('REPORTE DE GRUPOS');
+$pdf->SetTitle('REPORTE DE departamentos');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->setPrintHeader(false);
@@ -55,7 +55,7 @@ $pdf->SetFont('times', 'B', 18);
 
 // AGREGAR PAGINA
 $pdf->AddPage('P', 'LEGAL');
-$pdf->Cell(0, 0, "REPORTE DE GRUPOS", 0, 1, 'C');
+$pdf->Cell(0, 0, "REPORTE DE departamentos", 0, 1, 'C');
 //SALTO DE LINEA
 $pdf->Ln();
 //COLOR DE TABLA
@@ -74,21 +74,21 @@ $pdf->Ln();
 $pdf->SetFont('', '');
 $pdf->SetFillColor(255, 255, 255);
 //CONSULTAS DE LOS REGISTROS
-$grupos = consultas::get_datos("select * from grupos order by gru_cod");
+$departamentos = consultas::get_datos("select * from departamentos order by gru_cod");
 
-if (!empty($grupos)) {
-    foreach ($grupos as $grupos) {
-        $pdf->Cell(50, 5, $grupos['gru_cod'], 1, 0, 'C', 1);
-        $pdf->Cell(70, 5, $grupos['gru_nombre'], 1, 0, 'L', 1);
+if (!empty($departamentos)) {
+    foreach ($departamentos as $departamentos) {
+        $pdf->Cell(50, 5, $departamentos['gru_cod'], 1, 0, 'C', 1);
+        $pdf->Cell(70, 5, $departamentos['nombre_grupo'], 1, 0, 'L', 1);
         $pdf->Ln();
     }
 }else{
-    $pdf->Cell(0, 0, "No se han registrado grupos", 1, 0, 'L', 1);
+    $pdf->Cell(0, 0, "No se han registrado departamentos", 1, 0, 'L', 1);
 }
 
 
 
 
 //SALIDA AL NAVEGADOR
-$pdf->Output('reporte_grupos.pdf', 'I');
+$pdf->Output('reporte_departamentos.pdf', 'I');
 ?>

@@ -4,7 +4,7 @@
 
 CREATE OR REPLACE FUNCTION sp_sucursal(
     ban integer,
-    vid_sucursal integer DEFAULT 0,
+    id_institucion integer DEFAULT 0,
     vsuc_descri character varying DEFAULT ''::character varying)
   RETURNS character varying AS
 $BODY$ declare mensaje varchar default null;
@@ -15,11 +15,11 @@ begin
                    mensaje = 'Se guardó correctamente la sucursal*sucursal_index';
          elsif ban = 2 then
                    update sucursal set suc_descri = trim(upper(vsuc_descri))
-                   where id_sucursal =vid_sucursal;
+                   where id_sucursal =id_institucion;
                    mensaje = 'Se modificó correctamente la sucursal*sucursal_index';
           elsif ban = 3 then
                    delete from sucursal
-                   where id_sucursal = vid_sucursal;
+                   where id_sucursal = id_institucion;
                    mensaje = 'Se eliminó correctamente la sucursal*sucursal_index';
            end if;        
          return mensaje;

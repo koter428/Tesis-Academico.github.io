@@ -66,12 +66,12 @@
                                             <div class="col-lg-3 col-md-6 col-xs-12">
                                                 <label>Sucursal:</label>
                                                 <input type="text" class="form-control" name="vsucursal" id="vsucursal" value="<?php echo $_SESSION['sucursal'];?>" readonly=""/>
-                                                <input type="hidden" class="form-control" name="vid_sucursal" id="vid_sucursal" value="<?php echo $_SESSION['id_sucursal'];?>" readonly=""/>
+                                                <input type="hidden" class="form-control" name="id_institucion" id="id_institucion" value="<?php echo $_SESSION['id_sucursal'];?>" readonly=""/>
                                             </div>      
                                             <div class="col-lg-6 col-md-6 col-xs-12">
-                                                <label>Empleado:</label>
-                                                <input type="text" class="form-control" name="vemp_nombres" id="vemp_nombres" value="<?php echo $_SESSION['nombres'];?>" readonly=""/>                                                
-                                                <input type="hidden" class="form-control" name="vemp_cod" id="vemp_cod" value="<?php echo $_SESSION['emp_cod'];?>" readonly=""/>                                                
+                                                <label>empleado:</label>
+                                                <input type="text" class="form-control" name="vnombre_empleados" id="vnombre_empleados" value="<?php echo $_SESSION['nombres'];?>" readonly=""/>                                                
+                                                <input type="hidden" class="form-control" name="vid_empleado" id="vid_empleado" value="<?php echo $_SESSION['id_empleado'];?>" readonly=""/>                                                
                                             </div>                                                  
                                         </div>
                                     </div>

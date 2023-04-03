@@ -33,7 +33,7 @@
                                 </div> 
                                 <form action="perfil_comando.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                     <div class="box-body"> 
-                                        <?php $usu = consultas::get_datos("select * from v_usuarios where usu_cod =" . $_SESSION['usu_cod']); ?>
+                                        <?php $usu = consultas::get_datos("select * from vista_usuarios where usu_cod =" . $_SESSION['usu_cod']); ?>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <input type="hidden" name="accion" value="2"/>
@@ -60,7 +60,7 @@
                                             </div>
                                     <!-- FIN LISTA DESPLEGABLE CLAVE -->
                                         <div class="form-group">
-                                            <label class="control-label col-lg-2">Codigo Empleado:</label>
+                                            <label class="control-label col-lg-2">Codigo empleado:</label>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
                                                 <input type="text" name="vcod_emp" class="form-control" value="<?php echo $usu[0]['car_descri']; ?>"required="" disabled=""/>                                                
                                             </div>
@@ -68,13 +68,13 @@
                                     <div class="form-group">
                                         <label class="control-label col-lg-2">Tipo De Usuario:</label>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
-                                            <input type="text" name="vgru_cod" class="form-control" value="<?php echo $usu[0]['gru_nombre']; ?>"required="" disabled=""/>                                                
+                                            <input type="text" name="vgru_cod" class="form-control" value="<?php echo $usu[0]['nombre_grupo']; ?>"required="" disabled=""/>                                                
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-lg-2">Sucursal:</label>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
-                                            <input type="text" name="vid_sucursal" class="form-control" value="<?php echo $usu[0]['suc_descri']; ?>"required=""disabled=""/>                                                
+                                            <input type="text" name="id_institucion" class="form-control" value="<?php echo $usu[0]['suc_descri']; ?>"required=""disabled=""/>                                                
                                         </div>
                                     </div>
                             </div>

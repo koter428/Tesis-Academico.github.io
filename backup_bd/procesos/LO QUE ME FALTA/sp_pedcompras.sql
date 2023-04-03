@@ -5,21 +5,21 @@
 CREATE OR REPLACE FUNCTION sp_pedcompra(
     ban integer,
     vped_com integer,
-    vemp_cod integer,
+    vid_empleado integer,
     vprv_cod integer,
-    vid_sucursal integer)
+    id_institucion integer)
   RETURNS character varying AS
 $BODY$
 declare mensaje varchar default null;
 begin
 	if ban = 1 then --insertar
-		INSERT INTO pedido_cabcompra(ped_com, emp_cod, ped_fecha, prv_cod, ped_estado, id_sucursal)
+		INSERT INTO pedido_cabcompra(ped_com, id_empleado, ped_fecha, prv_cod, ped_estado, id_sucursal)
 		VALUES (calcular_ultimo('pedido_cabcompra','ped_com'),
-		vemp_cod,
+		vid_empleado,
 		current_date, 
 		vprv_cod, 
 		'P',
-		vid_sucursal);
+		id_institucion);
 		mensaje = 'Se agregó correctamente el pedido de compra';	
 	elsif ban  = 2 then 
 		update pedido_cabcompra set prv_cod = vprv_cod

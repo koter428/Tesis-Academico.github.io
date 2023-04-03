@@ -65,7 +65,7 @@ if (!empty(isset($_REQUEST['opcion']))) {
                             . "where aju_fecha::date between '" . $_REQUEST['vdesde'] . "' and '" . $_REQUEST['vhasta'] . "'");
             break;
         case 2: //empleado
-                $cabeceras = consultas::get_datos("select * from v_ajustes where emp_cod in(" . $_REQUEST['vempleado'] . ")");
+                $cabeceras = consultas::get_datos("select * from v_ajustes where id_empleado in(" . $_REQUEST['vempleado'] . ")");
                 break; 
         case 3: //articulo
             $cabeceras = consultas::get_datos("select * from v_ajustes "

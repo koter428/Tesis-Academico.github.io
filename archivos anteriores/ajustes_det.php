@@ -59,7 +59,7 @@
                                                         <tr>
                                                             <th>N° Ajustes</th>
                                                             <th>Fecha</th>
-                                                            <th>Empleado</th>
+                                                            <th>empleado</th>
                                                             <th>Monto Ajustado</th>
                                                         </tr>
                                                     </thead>
@@ -68,7 +68,7 @@
                                                             <tr>
                                                                 <td data-title='N° ajuste'><?php echo $aju['aju_cod']; ?></td>
                                                                 <td data-title='Fecha'><?php echo $aju['aju_fecha']; ?></td>
-                                                                <td data-title='Empleado'><?php echo $aju['empleado']; ?></td>
+                                                                <td data-title='empleado'><?php echo $aju['empleado']; ?></td>
                                                                 <td data-title='Total'><?php echo number_format($aju['aju_total'], 0, ",", "."); ?></td>
                                                             </tr>
                                                         <?php } ?>

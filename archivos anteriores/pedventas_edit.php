@@ -67,7 +67,7 @@
                                                         <input type="text" class="form-control" value="<?php echo $pedidos[0]['suc_descri'];?>" readonly=""/>                                                
                                                     </div>      
                                                     <div class="col-lg-6 col-md-6 col-xs-12">
-                                                        <label>Empleado:</label>
+                                                        <label>empleado:</label>
                                                         <input type="text" class="form-control" value="<?php echo $pedidos[0]['empleado'];?>" readonly=""/>                                                
                                                     </div>                                                  
                                                 </div>

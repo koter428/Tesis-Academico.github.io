@@ -71,7 +71,7 @@ if (!empty(isset($_REQUEST['opcion']))) {
                             . "where tra_cod in(select tra_cod from transferencia_detalle where art_cod in(" . $_REQUEST['vart_cod'] . "))");
             break;
         case 4: //empleado
-            $cabeceras = consultas::get_datos("select * from v_transfer where emp_cod in(" . $_REQUEST['vempleado'] . ")");
+            $cabeceras = consultas::get_datos("select * from v_transfer where id_empleado in(" . $_REQUEST['vempleado'] . ")");
             break;        
     }
 } else {
@@ -109,7 +109,7 @@ if (!empty($cabeceras)) {
                 full outer join deposito as destino on transferencias_detalle.dep_des = destino.dep_cod
                 full outer join articulo on transferencias_detalle.art_cod = articulo.art_cod,
                 empleado
-                where transferencias.emp_cod = empleado.emp_cod
+                where transferencias.id_empleado = empleado.id_empleado
                 and transferencias.tra_cod = " . $cabecera['tra_cod'];
         //echo $sql; return; 
         $detalles = consultas::get_datos($sql);

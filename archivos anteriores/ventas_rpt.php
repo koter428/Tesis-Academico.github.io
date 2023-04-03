@@ -48,7 +48,7 @@
                                                                     <a href="ventas_rpt.php?opcion=1" class="list-group-item">Por Fecha</a>
                                                                     <a href="ventas_rpt.php?opcion=2" class="list-group-item">Por Cliente</a>
                                                                     <a href="ventas_rpt.php?opcion=3" class="list-group-item">Por Articulo</a>
-                                                                    <a href="ventas_rpt.php?opcion=4" class="list-group-item">Por Empleado</a>
+                                                                    <a href="ventas_rpt.php?opcion=4" class="list-group-item">Por empleado</a>
                                                                     <a href="ventas_rpt.php?opcion=5" class="list-group-item">Por Condición</a>
                                                                 </div>
                                                             </div>
@@ -112,15 +112,15 @@
                                                                             <?php       
                                                                             break;
                                                                             case 4:
-                                                                                $empleados = consultas::get_datos("select * from empleado where emp_cod in(select emp_cod from ventas)");
+                                                                                $empleado = consultas::get_datos("select * from empleado where id_empleado in(select id_empleado from ventas)");
                                                                             ?>
                                                                             <div class="form-group">
-                                                                                <label class="control-label col-lg-2 col-md-2">Empleados:</label>
+                                                                                <label class="control-label col-lg-2 col-md-2">empleado:</label>
                                                                                 <div class="col-lg-6 col-md-6">
                                                                                     <select class="form-control select2" name="vempleado">
-                                                                                        <?php foreach ($empleados as $e) { ?>
-                                                                                        <option value="<?php echo $e['emp_cod'];?>">
-                                                                                        <?php echo $e['emp_nombre']." ".$e['emp_apellido'];?></option>
+                                                                                        <?php foreach ($empleado as $e) { ?>
+                                                                                        <option value="<?php echo $e['id_empleado'];?>">
+                                                                                        <?php echo $e['nombre_empleado']." ".$e['nombre_empleado'];?></option>
                                                                                         <?php }?>
                                                                                     </select>
                                                                                 </div>
