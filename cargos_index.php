@@ -11,8 +11,9 @@
         <?php 
         require 'ver_session.php'; /*VERIFICAR SESSION*/
         @session_start();/*Reanudar sesion*/
-        require 'menu/css_lte.ctp'; ?><!--ARCHIVOS CSS-->
-
+        require 'menu/css_lte.ctp'; 
+         //print_r($_SESSION); return;
+        ?><!--ARCHIVOS CSS-->
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -71,7 +72,7 @@
                                                 $valor = $_REQUEST['buscar'];
                                             }*/
                                             
-                                            $cargos = consultas::get_datos("select * from cargo where car_descri ilike '%".(isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by car_cod"); 
+                                            $cargos = consultas::get_datos("select * from cargos where nombre ilike '%".(isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by id_cargo"); 
                                                  if (!empty($cargos)) { ?>
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-condensed table-striped">
@@ -85,16 +86,16 @@
                                                     <tbody>
                                                         <?php foreach ($cargos as $cargo) { ?>
                                                         <tr>
-                                                            <td data-title="Descripción"><?php echo $cargo['car_descri'];?></td>
-                                                            <td data-title="Código"><?php echo $cargo['car_cod'];?></td>
+                                                            <td data-title="Descripción"><?php echo $cargo['nombre'];?></td>
+                                                            <td data-title="Código"><?php echo $cargo['id_cargo'];?></td>
                                                             <td data-title="Acciones" class="text-center">
                                                              <?php if ($_SESSION['CARGOS']['editar']=='t') { ?>
-                                                                <a onclick="editar(<?php echo "'".$cargo['car_cod']."_".$cargo['car_descri']."'";?>)" class="btn btn-warning btn-sm" role="buttom" 
+                                                                <a onclick="editar(<?php echo "'".$cargo['id_cargo']."_".$cargo['nombre']."'";?>)" class="btn btn-warning btn-sm" role="buttom" 
                                                                    data-title="Editar" rel="tooltip" data-toggle="modal" data-target="#editar">
                                                                     <i class="fa fa-edit"></i></a>
                                                                     <?php }?> 
                                                                     <?php if ($_SESSION['CARGOS']['borrar']=='t') { ?>
-                                                                <a onclick="borrar(<?php echo "'".$cargo['car_cod']."_".$cargo['car_descri']."'";?>)" class="btn btn-danger btn-sm" role="buttom" 
+                                                                <a onclick="borrar(<?php echo "'".$cargo['id_cargo']."_".$cargo['nombre']."'";?>)" class="btn btn-danger btn-sm" role="buttom" 
                                                                    data-title="Borrar" rel="tooltip" data-toggle="modal" data-target="#borrar">
                                                                     <i class="fa fa-trash"></i>
                                                                 </a>       
@@ -109,7 +110,7 @@
                                             <div class="alert alert-info flat">
                                                 <span class="glyphicon glyphicon-info-sign"></span>
                                                 No se han registrado cargos...
-                                            </div>
+                                            </div>Z
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -130,12 +131,12 @@
                               </div>
                               <form action="cargo_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                   <input type="hidden" name="accion" value="1">
-                                  <input type="hidden" name="vcar_cod" value="0">
+                                  <input type="hidden" name="id_cargo" value="0">
                                   <div class="modal-body">
                                       <div class="form-group">
                                           <label class="control-label col-sm-2">Descripción:</label>
                                           <div class="col-sm-10">
-                                              <input type="text" name="vcar_descri" class="form-control" required="" autofocus=""/>
+                                              <input type="text" name="nombre" class="form-control" required="" autofocus=""/>
                                           </div>
                                       </div>
                                   </div>
@@ -160,12 +161,12 @@
                               </div>
                               <form action="cargo_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                   <input type="hidden" name="accion" value="2">
-                                  <input type="hidden" name="vcar_cod" id="cod" value="0">
+                                  <input type="hidden" name="id_cargo" id="cod" value="0">
                                   <div class="modal-body">
                                       <div class="form-group">
                                           <label class="control-label col-sm-2">Descripción:</label>
                                           <div class="col-sm-10">
-                                              <input type="text" name="vcar_descri" id="descri" class="form-control" required="" autofocus=""/>
+                                              <input type="text" name="nombre" id="descri" class="form-control" required="" autofocus=""/>
                                           </div>
                                       </div>
                                   </div>
@@ -229,7 +230,7 @@
         };
         function borrar(datos){
             var dat = datos.split("_");
-            $('#si').attr('href','cargo_control.php?vcar_cod='+dat[0]+'&vcar_descri='+dat[1]+'&accion=3');
+            $('#si').attr('href','cargo_control.php?id_cargo='+dat[0]+'&nombre='+dat[1]+'&accion=3');
             $('#confirmacion').html('<span class="glyphicon glyphicon-warning-sign"></span> \n\
             Desea borrrar el cargo <strong>'+dat[1]+'</strong>?');
         }

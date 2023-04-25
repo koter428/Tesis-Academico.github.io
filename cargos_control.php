@@ -11,17 +11,17 @@ $accion_anterior = $accion;
 if(strcmp($accion,"5") == 0) $accion = "1";
 
 if(strcmp($accion,"1") == 0 || strcmp($accion,"2") == 0){
-    $sql = "select sp_cargo(" . $accion . "," . (!empty($_REQUEST['vcar_cod']) ? $_REQUEST['vcar_cod'] : 0) . ",'" .
-    (!empty($_REQUEST['vcar_descri']) ? $_REQUEST['vcar_descri'] : "") . "') as resul";
+    $sql = "select sp_cargo(" . $accion . "," . (!empty($_REQUEST['id_cargo']) ? $_REQUEST['id_cargo'] : 0) . ",'" .
+    (!empty($_REQUEST['nombre']) ? $_REQUEST['nombre'] : "") . "') as resul";
 }
 else if (strcmp($accion,"3") == 0){
-    $sql = "select sp_cargo(" . $accion . "," . $_REQUEST['vcar_cod']. ",'') as resul";
+    $sql = "select sp_cargo(" . $accion . "," . $_REQUEST['id_cargo']. ",'') as resul";
 }
 $mensaje = consultas::get_datos($sql);
 
 if(strcmp($accion_anterior,"5") == 0){
     //animate notify
-    header("location:empleado_add.php");
+    header("location:funcionarios_add.php");
 }
 else{
     if (isset($mensaje)) {

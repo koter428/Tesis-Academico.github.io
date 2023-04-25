@@ -8,9 +8,11 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <?php 
-        require 'ver_session.php'; /*VERIFICAR SESSION*/
-        @session_start();/*Reanudar sesion*/
-        require 'menu/css_lte.ctp'; ?><!--ARCHIVOS CSS-->
+            require 'ver_session.php'; /*VERIFICAR SESSION*/
+            @session_start();/*Reanudar sesion*/
+            require 'menu/css_lte.ctp'; 
+            // print_r($_SESSION); return;
+        ?><!--ARCHIVOS CSS-->
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -29,12 +31,12 @@
                             </div>
                             <?php } ?>                 
                             <div class="box box-primary">
-                            <?php if ($_SESSION['TIPOS_EDUCACION']['leer']==='t') { ?>
+                            <?php if ($_SESSION['TIPOS EDUCACION']['leer']==='t') { ?>
                                 <div class="box-header">
                                     <i class="ion ion-clipboard"></i>
                                     <h3 class="box-title">TIPOS DE EDUCACION</h3>                                    
                                     <div class="box-tools">
-                                    <?php if ($_SESSION['TIPOS_EDUCACION']['insertar']==='t') { ?> 
+                                    <?php if ($_SESSION['TIPOS EDUCACION']['insertar']==='t') { ?> 
                                         <a class="btn btn-primary btn-sm" data-title="Agregar" rel="tooltip" 
                                            data-toggle="modal" data-target="#registrar">
                                             <i class="fa fa-plus"></i>
@@ -68,8 +70,10 @@
                                             if (isset($_REQUEST['buscar'])) {
                                                 $valor = $_REQUEST['buscar'];
                                             }*/
-                                            $tipos = consultas::get_datos("select * from tipos_educacion where nombre ilike '%".(isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by id_tipo"); 
-                                                 if (!empty($tipòs)) { ?>
+                                            $sql = "select * from TIPOS_EDUCACION where nombre ilike '%".(isset($_REQUEST['buscar'])?$_REQUEST['buscar']:"")."%'order by id_tipo";
+                                            // echo $sql; return;
+                                            $tipos = consultas::get_datos($sql); 
+                                                 if (!empty($tipos)) { ?>
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-condensed table-striped">
                                                     <thead>
@@ -85,12 +89,12 @@
                                                             <td data-title="Nombre"><?php echo $tipo['nombre'];?></td>
                                                             <td data-title="Código"><?php echo $tipo['id_tipo'];?></td>
                                                             <td data-title="Acciones" class="text-center">
-                                                            <?php if ($_SESSION['TIPOS_EDUCACION']['editar']=='t') { ?>
+                                                            <?php if ($_SESSION['TIPOS EDUCACION']['editar']=='t') { ?>
                                                                 <a onclick="editar(<?php echo  "'".$tipo['id_tipo']."_".$tipo['nombre']."'";?>)" class="btn btn-warning btn-sm" role="buttom" 
                                                                    data-title="Editar" rel="tooltip" data-toggle="modal" data-target="#editar">
                                                                     <i class="fa fa-edit"></i>
                                                                 </a> <?php }?> 
-                                                                <?php if ($_SESSION['TIPOS_EDUCACION']['borrar']=='t') { ?>
+                                                                <?php if ($_SESSION['TIPOS EDUCACION']['borrar']=='t') { ?>
                                                                 <a onclick="borrar(<?php echo "'".$tipo['id_tipo']."_".$tipo['nombre']."'";?>)" class="btn btn-danger btn-sm" role="buttom" 
                                                                    data-title="Borrar" rel="tooltip" data-toggle="modal" data-target="#borrar">
                                                                     <i class="fa fa-trash"></i>

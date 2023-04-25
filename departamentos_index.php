@@ -10,7 +10,8 @@
         <?php 
         require 'ver_session.php'; /*VERIFICAR SESSION*/
         @session_start();/*Reanudar sesion*/
-        require 'menu/css_lte.ctp'; ?><!--ARCHIVOS CSS-->
+        require 'menu/css_lte.ctp';
+          //print_r($_SESSION); return; ?><!--ARCHIVOS CSS-->
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -32,7 +33,7 @@
                             <?php if ($_SESSION['DEPARTAMENTOS']['leer']==='t') { ?>
                                 <div class="box-header">
                                     <i class="ion ion-clipboard"></i>
-                                    <h3 class="box-title">Departamento</h3>                                    
+                                    <h3 class="box-title">Departamentos</h3>                                    
                                     <div class="box-tools">
                                     <?php if ($_SESSION['DEPARTAMENTOS']['insertar']==='t') { ?> 
                                         <a class="btn btn-primary btn-sm" data-title="Agregar" rel="tooltip" 
@@ -85,13 +86,13 @@
                                                             <td data-title="nombre"><?php echo $dpto['nombre'];?></td>
                                                             <td data-title="Código"><?php echo $dpto['id_dpto'];?></td>
                                                             <td data-title="Acciones" class="text-center">
-                                                            <?php if ($_SESSION['departamentos']['editar']=='t') { ?>
-                                                                <a onclick="editar(<?php echo  "'".$dpto['id_dpto']."_".$dpto['nombre']."'";?>)" class="btn btn-warning btn-sm" role="buttom" 
+                                                            <?php if ($_SESSION['DEPARTAMENTOS']['editar']=='t') { ?>
+                                                                <a onclick="editar(<?php echo  "'".$dpto['id_dpto']."_".$dpto['nombre']."'"; ?>)" class="btn btn-warning btn-sm" role="buttom" 
                                                                    data-title="Editar" rel="tooltip" data-toggle="modal" data-target="#editar">
                                                                     <i class="fa fa-edit"></i>
                                                                 </a> <?php }?> 
-                                                                <?php if ($_SESSION['departamentos']['borrar']=='t') { ?>
-                                                                <a onclick="borrar(<?php echo "'".$dpto['id_dpto']."_".$dpto['nombre_']."'";?>)" class="btn btn-danger btn-sm" role="buttom" 
+                                                                <?php if ($_SESSION['DEPARTAMENTOS']['borrar']=='t') { ?>
+                                                                <a onclick="borrar(<?php echo "'".$dpto['id_dpto']."_".$dpto['nombre']."'"; ?>)" class="btn btn-danger btn-sm" role="buttom" 
                                                                    data-title="Borrar" rel="tooltip" data-toggle="modal" data-target="#borrar">
                                                                     <i class="fa fa-trash"></i>
                                                                 </a>  <?php }?>                                                           

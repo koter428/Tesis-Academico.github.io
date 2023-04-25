@@ -34,7 +34,7 @@
                             <?php if ($_SESSION['GRUPOS']['leer']==='t') { ?>
                                 <div class="box-header">
                                     <i class="ion ion-clipboard"></i>
-                                    <h3 class="box-title">Grupos</h3>                                    
+                                    <h3 class="box-title">Roles</h3>                                    
                                     <div class="box-tools">
                                     <?php if ($_SESSION['GRUPOS']['insertar']==='t') { ?> 
                                         <a class="btn btn-primary btn-sm" data-title="Agregar" rel="tooltip" 
@@ -125,7 +125,7 @@
                           <div class="modal-content">
                               <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal" arial-label="Close">x</button>
-                                  <h4 class="modal-title"><i class="fa fa-plus"></i> <strong>Registrar Grupo</strong></h4>
+                                  <h4 class="modal-title"><i class="fa fa-plus"></i> <strong>Registrar Lista de Roles</strong></h4>
                               </div>
                               <form action="grupos_control.php" method="post" accept-charset="utf-8" class="form-horizontal">
                                   <input type="hidden" name="accion" value="1">
